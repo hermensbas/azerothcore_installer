@@ -29,7 +29,7 @@ DATAPATH=${ROOT_DIR}/_server/azerothcore/env/dist/bin
 # if you want remore players to connects then this should the external IP/DNS
 # which also should be placed in the 3.35a client Realm.wtf
 # ----------------------------------------------------------------------------------------
-REALM_IP=192.168.178.186
+REALM_IP=192.168.178.185
 REALM_NAME="azerothcore.org"
 
 AH_BOT_MIN_ITEMS=25000
