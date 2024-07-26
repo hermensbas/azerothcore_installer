@@ -38,14 +38,6 @@ then
     git -C ${ROOT_DIR}/_download/modules/mod-ah-bot reset --hard origin/master
 
 
-    ##########################################################################################
-    # reset mod-progression-system to latest branch
-    ##########################################################################################
-    git -C ${ROOT_DIR}/_download/modules/mod-progression-system fetch origin
-    git -C ${ROOT_DIR}/_download/modules/mod-progression-system clean -fd
-    git -C ${ROOT_DIR}/_download/modules/mod-progression-system reset --hard origin/main
-
-
     echo "Executed..."
 
 fi
