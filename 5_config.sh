@@ -58,10 +58,6 @@ then
                 ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/mod_ahbot.conf.dist > \
                     ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/mod_ahbot.conf | exit 1
 
-    sudo cat ${ROOT_DIR}/config/modules/progression_system.conf \
-                ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/progression_system.conf.dist > \
-                    ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/progression_system.conf | exit 1
-
 
     ##########################################################################################
     # Set alias to start, stop and open wow or auth tmux sessions

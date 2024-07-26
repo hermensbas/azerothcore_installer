@@ -48,14 +48,6 @@ then
 
 
     ##########################################################################################
-    # Clone module mod-progression-system
-    ##########################################################################################
-    sudo rm -rf ${ROOT_DIR}/_download/modules/mod-progression-system > /dev/null 2>&1
-    git config --global --add safe.directory "${ROOT_DIR}/_download/modules/mod-progression-system"
-    git clone  https://github.com/azerothcore/mod-progression-system.git ${ROOT_DIR}/_download/modules/mod-progression-system
-
-
-    ##########################################################################################
     # Download client-data (only if file does not exist)
     ##########################################################################################
     if ! [ -f ${ROOT_DIR}/_data/data.zip ]; 
