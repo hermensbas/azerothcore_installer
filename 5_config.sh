@@ -69,8 +69,8 @@ then
     else
         echo " " >> ~/.bashrc
         echo "if [ -f ~/.bash_wow ]; then" >> ~/.bashrc
-        echo "  . ~/.bash_wow fi" >> ~/.bashrc
-        echo "if" >> ~/.bashrc
+        echo "  . ~/.bash_wow" >> ~/.bashrc
+        echo "fi" >> ~/.bashrc
     fi
     
     echo "ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
