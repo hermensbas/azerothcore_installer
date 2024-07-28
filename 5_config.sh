@@ -86,6 +86,8 @@ then
     source ~/.bashrc
     echo " "
     echo "###########################################################################################"
+    echo "## After the first install or changes either reboot or TYPE! 'source ~/.bashrc'"
+    echo "###########################################################################################"
     echo "## After the above you can use the following commands:"
     echo "### start   -  starts auth and world in tmux sessions server"
     echo "### stop    -  starts all servers"
