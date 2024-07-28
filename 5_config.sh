@@ -67,7 +67,7 @@ then
     then
         echo "bash_wow exists";
     else
-        echo "if [ -f ~/.bash_wow ]; then . ~/.bash_wow fi" > ~/.bashrc
+        echo "if [ -f ~/.bash_wow ]; then . ~/.bash_wow fi" >> ~/.bashrc
     fi
     
     echo "ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
