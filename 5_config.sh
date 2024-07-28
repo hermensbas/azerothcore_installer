@@ -63,7 +63,7 @@ then
     # Set alias to start, stop and open wow or auth tmux sessions
     ##########################################################################################
 
-    if grep -q '^bash_wow' ~/.bashrc
+    if grep -R "bash_wow" ~/.bashrc
     then
         echo "bash_wow exists";
     else
