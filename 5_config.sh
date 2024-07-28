@@ -62,19 +62,26 @@ then
     ##########################################################################################
     # Set alias to start, stop and open wow or auth tmux sessions
     ##########################################################################################
-    echo "ROOT_DIR=${ROOT_DIR}" > ~/.bash_aliases
-    echo "DATAPATH=${DATAPATH}" >> ~/.bash_aliases
-    echo "alias update='${ROOT_DIR}/2_update.sh'" >> ~/.bash_aliases
-    echo "alias build='${ROOT_DIR}/3_build.sh'" >> ~/.bash_aliases
-    echo "alias compile='${ROOT_DIR}/4_compile.sh'" >> ~/.bash_aliases
-    echo "alias config='${ROOT_DIR}/5_config.sh'" >> ~/.bash_aliases
-    echo "alias start='${ROOT_DIR}/6_start.sh'" >> ~/.bash_aliases
-    echo "alias stop='tmux kill-server'" >> ~/.bash_aliases
-    echo "alias wow='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${WORLDSERVER_SESSION}'" >> ~/.bash_aliases
-    echo "alias auth='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${AUTHSERVER_SESSION}'" >> ~/.bash_aliases
+
+    if grep -q '^bash_wow' ~/.bashrc
+    then
+        echo "bash_wow exists";
+    else
+        echo "if [ -f ~/.bash_wow ]; then . ~/.bash_wow fi" > ~/.bashrc
+    fi
+    
+    echo "ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
+    echo "DATAPATH=${DATAPATH}" >> ~/.bash_wow
+    echo "alias update='${ROOT_DIR}/2_update.sh'" >> ~/.bash_wow
+    echo "alias build='${ROOT_DIR}/3_build.sh'" >> ~/.bash_wow
+    echo "alias compile='${ROOT_DIR}/4_compile.sh'" >> ~/.bash_wow
+    echo "alias config='${ROOT_DIR}/5_config.sh'" >> ~/.bash_wow
+    echo "alias start='${ROOT_DIR}/6_start.sh'" >> ~/.bash_wow
+    echo "alias stop='tmux kill-server'" >> ~/.bash_wow
+    echo "alias wow='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${WORLDSERVER_SESSION}'" >> ~/.bash_wow
+    echo "alias auth='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${AUTHSERVER_SESSION}'" >> ~/.bash_wow
+    source ~/.bashrc
     echo " "
-    echo "###########################################################################################"
-    echo "## After the first install or changes either reboot or TYPE! 'source ~/.bashrc'"
     echo "###########################################################################################"
     echo "## After the above you can use the following commands:"
     echo "### start   -  starts auth and world in tmux sessions server"
