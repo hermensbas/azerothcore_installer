@@ -62,12 +62,10 @@ fi
 echo " "
 
 echo "###########################################################################################"
-echo "Word of advice:"
-echo "## 1. -------------------------------------------------------------------------------------"
-echo "After (re)starting the server and logging in with the client wait 5-10m so the bots can" 
-echo "settle abit; getting an assigned level and teleport to an area for that level" 
-echo "## 2. -------------------------------------------------------------------------------------"
-echo "If you wanna type alot of commands in the world-server session you might want to disable" 
-echo "## the playerbots mod through the playerbot config, since the playerbots generates alot of"
-echo "## output which disrupts the command line typing :) When done enable again ./config/module"
+echo "# type in terminal: "
+echo "#   - 'wow'            : for the worlds-server session"
+echo "#   - 'auth'           : for the auth-server session"
+echo "#   - 'ctrl+b then d'  : detach from session (if not working use ctrl-z)"
+echo "#   - 'stop'           : the kill the world and auth -server sessions"
+echo "#   - 'update'         :   
 echo "###########################################################################################"
