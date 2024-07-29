@@ -1,3 +1,3 @@
 USE acore_world;
 UPDATE mod_auctionhousebot
-SET minitems = 30000, maxitems = 40000;
+SET minitems = '{{AH_BOT_MIN_ITEMS}}', maxitems = '{{AH_BOT_MAX_ITEMS}}';

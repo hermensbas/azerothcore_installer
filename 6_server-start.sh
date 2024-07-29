@@ -4,27 +4,24 @@ source ${ROOT_DIR}/variables.sh
 
 
 ##########################################################################################
-# Apply realm settings
+# Apply server realm configuration
 ##########################################################################################
-sudo mysql -u root --database="acore_auth" -e "UPDATE realmlist SET address = '${REALM_IP}' WHERE id = 1;"
-sudo mysql -u root --database="acore_auth" -e "UPDATE realmlist SET name = '${REALM_NAME}' WHERE id = 1;"
-echo "Realm settings updated..."
+source ${ROOT_DIR}/helper/update_realm_ip.sh ${REALM_IP}
+source ${ROOT_DIR}/helper/update_realm_ip.sh ${REALM_NAME}
 echo " "
 
 
 ##########################################################################################
-# Apply ah-modbot settings
+# Apply ah-bot custom configuration
 ##########################################################################################
-sudo mysql -u root --database="acore_world" -e "UPDATE mod_auctionhousebot SET minitems = ${AH_BOT_MIN_ITEMS}, maxitems = ${AH_BOT_MAX_ITEMS};"
-echo "Module ah-modbot updated..."
+source ${ROOT_DIR}/helper/update_ahbot_config.sh ${AH_BOT_MIN_ITEMS} ${AH_BOT_MAX_ITEMS}
 echo " "
 
 
 ##########################################################################################
-# reset playerbots data (enforces performance and bot levels balance)
+# Clear playerbots account and characters (enforces performance and bot levels balance)
 ##########################################################################################
-sudo mysql -u root --database="acore_characters" < ${ROOT_DIR}/lib/clear-bots.sql
-echo "Module playerbots updated..."
+source ${ROOT_DIR}/helper/clear_playerbots.sh
 echo " "
 
 
@@ -59,13 +56,16 @@ if tmux send-keys -t $WORLDSERVER_SESSION "$WORLDSERVER" C-m; then
 else
     echo "Error when executing \"$WORLDSERVER\" inside $WORLDSERVER_SESSION"
 fi
-echo " "
 
+echo " "
 echo "###########################################################################################"
-echo "# type in terminal: "
-echo "#   - 'wow'            : for the worlds-server session"
-echo "#   - 'auth'           : for the auth-server session"
-echo "#   - 'ctrl+b then d'  : detach from session (if not working use ctrl-z)"
-echo "#   - 'stop'           : the kill the world and auth -server sessions"
-echo "#   - 'update'         :   
+echo "## After the above you can use the following commands:"
+echo "### update  -  Updates source-code to latest version"
+echo "### build   -  Builds the server based on source-code"
+echo "### compile -  Compiles the code based on the build server"
+echo "### config  -  Applies the server configration"
+echo "### start   -  starts auth and world in tmux sessions server"
+echo "### stop    -  stops all sessions"
+echo "### wow     -  logon world-server (tmux) session"
+echo "### auth    -  logon auth-server (tmux) session"
 echo "###########################################################################################"
