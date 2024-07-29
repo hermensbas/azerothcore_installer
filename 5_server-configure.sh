@@ -3,7 +3,7 @@ ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 source ${ROOT_DIR}/variables.sh
 
 
-read -p "This will initialize and apply the config, are you sure? (Y)es/(N)o: " -n 1 -r
+read -p "This will configur the server, are you sure? (Y)es/(N)o: " -n 1 -r
 echo " ";
 if [[ $REPLY =~ ^[Yy]$ ]];
 then

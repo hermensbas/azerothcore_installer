@@ -3,7 +3,7 @@ ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 source ${ROOT_DIR}/variables.sh
 
 
-read -p "This will DOWNLOAD and overwrite the current downloaded source code, are you sure? (Y)es/(N)o: " -n 1 -r
+read -p "This will install the source code. Are you sure? (Y)es/(N)o: " -n 1 -r
 echo " ";
 if [[ $REPLY =~ ^[Yy]$ ]];
 then

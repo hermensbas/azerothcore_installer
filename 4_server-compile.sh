@@ -3,7 +3,7 @@ ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 source ${ROOT_DIR}/variables.sh
 
 
-read -p "This will (re)compile server, are you sure? (Y)es/(N)o: " -n 1 -r
+read -p "This will compile server. Are you sure? (Y)es/(N)o: " -n 1 -r
 echo " ";
 if [[ $REPLY =~ ^[Yy]$ ]];
 then
@@ -56,6 +56,7 @@ then
     # Ensure all folder and files are accesible for the current user
     ##########################################################################################
     sudo find ${ROOT_DIR}/_server/ -user root -exec sudo chown $USER: {} +
+
 
     echo "Executed..."
 
