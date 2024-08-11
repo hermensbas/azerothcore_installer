@@ -75,11 +75,11 @@ then
     
     echo "ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
     echo "DATAPATH=${DATAPATH}" >> ~/.bash_wow
-    echo "alias update='${ROOT_DIR}/2_update.sh'" >> ~/.bash_wow
-    echo "alias build='${ROOT_DIR}/3_build.sh'" >> ~/.bash_wow
-    echo "alias compile='${ROOT_DIR}/4_compile.sh'" >> ~/.bash_wow
-    echo "alias config='${ROOT_DIR}/5_config.sh'" >> ~/.bash_wow
-    echo "alias start='${ROOT_DIR}/6_start.sh'" >> ~/.bash_wow
+    echo "alias update='${ROOT_DIR}/2_source-update.sh'" >> ~/.bash_wow
+    echo "alias build='${ROOT_DIR}/3_server-build.sh'" >> ~/.bash_wow
+    echo "alias compile='${ROOT_DIR}/4_server-compile.sh'" >> ~/.bash_wow
+    echo "alias config='${ROOT_DIR}/5_server-configure.sh'" >> ~/.bash_wow
+    echo "alias start='${ROOT_DIR}/6_server-start.sh'" >> ~/.bash_wow
     echo "alias stop='tmux kill-server'" >> ~/.bash_wow
     echo "alias wow='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${WORLDSERVER_SESSION}'" >> ~/.bash_wow
     echo "alias auth='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${AUTHSERVER_SESSION}'" >> ~/.bash_wow
