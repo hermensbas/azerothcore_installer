@@ -14,7 +14,7 @@ echo " "
 ##########################################################################################
 # Apply ah-bot custom configuration
 ##########################################################################################
-source ${ROOT_DIR}/helper/update_ahbot_config.sh ${MOD_AHBOT_MIN_ITEMS} ${MOD_AHBOT_MAX_ITEMS}
+source ${ROOT_DIR}/helper/update_ahbot_config.sh ${AH_BOT_MIN_ITEMS} ${AH_BOT_MAX_ITEMS}
 echo " "
 
 
