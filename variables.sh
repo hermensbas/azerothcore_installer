@@ -4,7 +4,10 @@ ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 ##########################################################################################
 # DO NOT MODIFY THIS FILE, SEE /config/user.env settings instead!!
 ##########################################################################################
-set -o allexport && source ${ROOT_DIR}/config/user.env && set +o allexport
+REALM_IP=192.168.178.185
+REALM_NAME="azerothcore.org"
+AH_BOT_MIN_ITEMS=25000
+AH_BOT_MAX_ITEMS=30000
 
 ##########################################################################################
 # Server and project internal variables 
