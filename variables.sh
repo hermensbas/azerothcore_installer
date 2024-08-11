@@ -2,7 +2,7 @@
 ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 
 ##########################################################################################
-# DO NOT MODIFY THIS FILE, SEE /config/user.env settings instead!!
+# USER CONFIG
 ##########################################################################################
 REALM_IP=192.168.178.185
 REALM_NAME="azerothcore.org"
