@@ -1,14 +1,12 @@
 #!/bin/bash
-ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-source ${ROOT_DIR}/../variables.sh
 
+# param 1
 REALM_IP=$1;
 if [ -z "$REALM_IP" ]
 then
  echo "First parameter 'REALM_IP' is required";
  exit 1;
 fi
-
 
 sed -e "s/{{REALM_IP}}/$REALM_IP/g" \
     "${ROOT_DIR}/../sql/update_realm_ip.sql" > "/tmp/update_realm_ip.sql"
