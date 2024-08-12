@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# param 1
 ACCOUNT_NAME=$1;
 if [ -z "$ACCOUNT_NAME" ]
 then
