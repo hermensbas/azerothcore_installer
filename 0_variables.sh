@@ -25,10 +25,9 @@ MYSQL_DATABASE=acore_auth
 
 DATAPATH=${ROOT_DIR}/_server/azerothcore/env/dist/bin
 
-
-
-
-
+##########################################################################################
+# Configure bash with variables above and alias
+##########################################################################################
 if grep -R "bash_wow" ~/.bashrc
 then
     echo "bash_wow exists";
@@ -40,7 +39,25 @@ else
 fi
     
 echo "ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
+
+echo "REALM_IP=${REALM_IP}" >> ~/.bash_wow
+echo "REALM_NAME=${REALM_NAME}" >> ~/.bash_wow
+
+echo "AH_BOT_MIN_ITEMS=${AH_BOT_MIN_ITEMS}" >> ~/.bash_wow
+echo "AH_BOT_MAX_ITEMS=${AH_BOT_MAX_ITEMS}" >> ~/.bash_wow
+
+echo "AUTHSERVER=${AUTHSERVER}" >> ~/.bash_wow
+echo "WORLDSERVER=${WORLDSERVER}" >> ~/.bash_wow
+echo "AUTHSERVER_SESSION=${AUTHSERVER_SESSION}" >> ~/.bash_wow
+echo "WORLDSERVER_SESSION=${WORLDSERVER_SESSION}" >> ~/.bash_wow
+
+echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> ~/.bash_wow
+echo "MYSQL_USER=${MYSQL_USER}" >> ~/.bash_wow
+echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> ~/.bash_wow
+echo "MYSQL_DATABASE=${MYSQL_DATABASE}" >> ~/.bash_wow
+
 echo "DATAPATH=${DATAPATH}" >> ~/.bash_wow
+
 echo "alias update='${ROOT_DIR}/2_source-update.sh'" >> ~/.bash_wow
 echo "alias build='${ROOT_DIR}/3_server-build.sh'" >> ~/.bash_wow
 echo "alias compile='${ROOT_DIR}/4_server-compile.sh'" >> ~/.bash_wow
@@ -49,10 +66,9 @@ echo "alias start='${ROOT_DIR}/6_server-start.sh'" >> ~/.bash_wow
 echo "alias stop='tmux kill-server'" >> ~/.bash_wow
 echo "alias wow='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${WORLDSERVER_SESSION}'" >> ~/.bash_wow
 echo "alias auth='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${AUTHSERVER_SESSION}'" >> ~/.bash_wow
-source ~/.bashrc
 echo " "
 echo "###########################################################################################"
-echo "## After the first install or changes either reboot or TYPE! 'source ~/.bashrc'"
+echo "## After the first install or changes either reboot or TYPE 'source ~/.bashrc' !!!!!!!!"
 echo "###########################################################################################"
 echo "## After the above you can use the following commands:"
 echo "### update  -  Updates source-code to latest version"
