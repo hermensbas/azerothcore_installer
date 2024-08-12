@@ -1,6 +1,6 @@
 # azerothcore_installer
 
-# Server setup
+## Server setup
  - vmware player
  - ubuntu-24.04-live-server-amd64.iso
  - minimal setup
