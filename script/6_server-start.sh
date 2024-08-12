@@ -57,6 +57,7 @@ fi
 echo " "
 echo "###########################################################################################"
 echo "## After the above you can use the following commands:"
+echo "### menu    -  Shows menu"
 echo "### install -  Download the source source-code"
 echo "### update  -  Updates source-code to latest version"
 echo "### build   -  Builds the server based on source-code"
