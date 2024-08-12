@@ -49,22 +49,3 @@ echo "alias start='${ROOT_DIR}/6_server-start.sh'" >> ~/.bash_wow
 echo "alias stop='tmux kill-server'" >> ~/.bash_wow
 echo "alias wow='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${WORLDSERVER_SESSION}'" >> ~/.bash_wow
 echo "alias auth='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${AUTHSERVER_SESSION}'" >> ~/.bash_wow
-
-#----------------------------------------------------------------------------------------
-# Print alias
-#----------------------------------------------------------------------------------------
-echo " "
-echo "###########################################################################################"
-echo "## After the first install or changes either reboot or TYPE 'source ~/.bashrc' !!!!!!!!"
-echo "###########################################################################################"
-echo "## After the above you can use the following commands:"
-echo "### install -  Download the source source-code"
-echo "### update  -  Updates source-code to latest version"
-echo "### build   -  Builds the server based on source-code"
-echo "### compile -  Compiles the code based on the build server"
-echo "### config  -  Applies the server configration"
-echo "### start   -  starts auth and world in tmux sessions server"
-echo "### stop    -  stops all sessions"
-echo "### wow     -  logon world-server (tmux) session"
-echo "### auth    -  logon auth-server (tmux) session"
-echo "###########################################################################################"
