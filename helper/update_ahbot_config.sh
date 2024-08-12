@@ -1,6 +1,4 @@
 #!/bin/bash
-ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-source ${ROOT_DIR}/../variables.sh
 
 AH_BOT_MIN_ITEMS=$1;
 if [ -z "$AH_BOT_MIN_ITEMS" ]
