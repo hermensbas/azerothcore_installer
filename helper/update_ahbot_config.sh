@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# param 1
 AH_BOT_MIN_ITEMS=$1;
 if [ -z "$AH_BOT_MIN_ITEMS" ]
 then
@@ -7,13 +8,14 @@ then
  echo "Second parameter 'AH_BOT_MAX_ITEMS' is required";
  exit 1;
 fi
+
+# param 2
 AH_BOT_MAX_ITEMS=$2;
 if [ -z "$AH_BOT_MAX_ITEMS" ]
 then
  echo "Second parameter 'AH_BOT_MAX_ITEMS' is required";
  exit 1;
 fi
-
 
 sed -e "s/{{AH_BOT_MIN_ITEMS}}/$AH_BOT_MIN_ITEMS/g" \
     -e "s/{{AH_BOT_MAX_ITEMS}}/$AH_BOT_MAX_ITEMS/g" \
