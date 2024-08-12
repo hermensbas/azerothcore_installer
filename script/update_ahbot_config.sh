@@ -22,5 +22,5 @@ sed -e "s/{{AH_BOT_MIN_ITEMS}}/$AH_BOT_MIN_ITEMS/g" \
     "${ROOT_DIR}/sql/update_ahbot_config.sql" > "/tmp/update_ahbot_config.sql"
 sudo mysql -u root --database="acore_characters" < /tmp/update_ahbot_config.sql
 
-
+echo "Configured mod-ahbot with AH_MIN_ITEMS: ${AH_BOT_MIN_ITEMS}, AH_MAX_ITEMS: ${AH_BOT_MAX_ITEMS}"
 echo "AH-bot config updated..."
