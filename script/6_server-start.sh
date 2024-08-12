@@ -4,7 +4,7 @@
 # Apply server realm configuration
 ##########################################################################################
 source ${ROOT_DIR}/script/update_realm_ip.sh ${REALM_IP}
-source ${ROOT_DIR}/script/update_realm_ip.sh ${REALM_NAME}
+source ${ROOT_DIR}/script/update_realm_name.sh ${REALM_NAME}
 echo " "
 
 
