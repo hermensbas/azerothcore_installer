@@ -11,7 +11,7 @@
 
 ## How to start
 ```bash
-sudo apt update -y && sudo apt upgrade -y && sudo git net-tools nano
+sudo apt update -y && sudo apt upgrade -y && sudo apt install -y git net-tools nano
 
 git clone https://github.com/hermensbas/azerothcore_installer.git
 cd azerothcore_installer.git
