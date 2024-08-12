@@ -1,7 +1,4 @@
 #!/bin/bash
-ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-source ${ROOT_DIR}/variables.sh
-
 
 ##########################################################################################
 # Apply server realm configuration
