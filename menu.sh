@@ -4,10 +4,9 @@ export ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 ##########################################################################################
 # USER CONFIG
 ##########################################################################################
-export REALM_IP="192.168.178.185"
-export REALM_NAME="azerothcore.org"
-export AH_BOT_MIN_ITEMS="25000"
-export AH_BOT_MAX_ITEMS="30000"
+set -a # export all variables created next
+source USER.ENV
+set +a # stop exporting
 
 ##########################################################################################
 # INTERNAL CONFIG
