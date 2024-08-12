@@ -25,10 +25,6 @@ nano settings.env (update ur settings)
 Simply follow the steps in sequence and abit of common sense.
 
 
-##### Configure ah-bot
-Create normal account and logon and create a level character and logout again then use script/find-character.sh 'accountName' to find the accountId and characterId (GUID)
-and update your ah-mod config in the ./config folder and reapply the config and start the server again.
-
 ## Client
 3.3.5a (Chromiecraft)
 HD patch optional
@@ -44,14 +40,6 @@ Configure your server IP in 'data/enUS/realmlist.wtf' files
 - AI_VoiceOver https://github.com/mrthinger/wow-voiceover/releases/download/v1.4.3/AI_VoiceOver-WoW_3.3.5-v1.4.3.zip
 - AI_VoiceOverData_Vanilla https://github.com/mrthinger/wow-voiceover/releases/download/v1.3.1/AI_VoiceOverData_Vanilla-v1.0.0.zip
 
-
-## Router port-forward if public
-Use the above (ifconfig) IP for the following router poort-forwarding and/or firewall rules settings.
-````
-# 3724 TCP AUTH-SERVER
-# 8085 TCP WORLD-SERVER
-````
-
 ## Create account
 world-server
 ```bash
@@ -60,3 +48,14 @@ world-server
 > acccount create admin mypass
 > account set gmlevel 3 -1 
 ```
+
+## Configure ah-bot
+Create normal account and logon and create a level 1 character and logout, then use script/find-character.sh 'accountName' to find the accountId and characterId (GUID)
+and update your ah-mod config in the ./config folder and reapply the config and start the server again.
+
+## Router port-forward if public
+Use the above (ifconfig) IP for the following router poort-forwarding and/or firewall rules settings.
+````
+# 3724 TCP AUTH-SERVER
+# 8085 TCP WORLD-SERVER
+````
