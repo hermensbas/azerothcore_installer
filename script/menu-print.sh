@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "###########################################################################################"
 echo "### menu    -  Shows menu"
 echo "### install -  Download the source source-code"
 echo "### update  -  Updates source-code to latest version"
@@ -10,3 +11,4 @@ echo "### start   -  starts auth and world in tmux sessions server"
 echo "### stop    -  stops all sessions"
 echo "### wow     -  logon world-server (tmux) session"
 echo "### auth    -  logon auth-server (tmux) session"
+echo "###########################################################################################"
