@@ -6,7 +6,7 @@
  - minimal setup
  - 70GB disksize (minimal 50GB)
  - 16 GB memorysize
- - 4 cores (amd 5700x)
+ - 6 cores (amd 5700x)
  - network (bridged mode)
 
 # Installer
