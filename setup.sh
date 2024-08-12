@@ -28,6 +28,6 @@ source ${ROOT_DIR}/script/0_bashrc.sh
 echo " "
 echo "###########################################################################################"
 echo "## After first run TYPE 'source ~/.bashrc' !!!!!!!!"
-source ${ROOT_DIR}/script/menu-print.sh
+source ${ROOT_DIR}/script/menu.sh
 echo "## After first run TYPE 'source ~/.bashrc' !!!!!!!!"
 echo "###########################################################################################"
