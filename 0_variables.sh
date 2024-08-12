@@ -10,7 +10,7 @@ AH_BOT_MIN_ITEMS="15000"
 AH_BOT_MAX_ITEMS="20000"
 
 ##########################################################################################
-# Server and project internal variables 
+# INTERNAL CONFIGS
 # https://github.com/azerothcore/azerothcore-wotlk/blob/master/conf/dist
 ##########################################################################################
 AUTHSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-authserver"
@@ -23,9 +23,15 @@ MYSQL_PASSWORD="acore"
 MYSQL_DATABASE="acore_auth"
 DATAPATH="${ROOT_DIR}/_server/azerothcore/env/dist/bin"
 
-##########################################################################################
+#----------------------------------------------------------------------------------------
+# add chmod rights
+#----------------------------------------------------------------------------------------
+sudo chmod +x ${ROOT_DIR}/*.sh
+sudo chmod +x ${ROOT_DIR}/helper/*.sh
+
+#----------------------------------------------------------------------------------------
 # Configure bash with variables above and alias
-##########################################################################################
+#----------------------------------------------------------------------------------------
 if grep -R "bash_wow" ~/.bashrc
 then
     echo "bash_wow exists";
