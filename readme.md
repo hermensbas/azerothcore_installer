@@ -26,7 +26,7 @@ Simply follow the steps in sequence and abit of common sense.
 
 
 ##### Configure ah-bot
-Create normal account and use script/find-character.sh 'charname' to find the accountId and characterId (GUID)
+Create normal account and logon and create a level character and logout again then use script/find-character.sh 'accountName' to find the accountId and characterId (GUID)
 and update your ah-mod config in the ./config folder and reapply the config and start the server again.
 
 ## Client
