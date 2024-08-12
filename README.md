@@ -9,7 +9,7 @@
  - 6 cores (amd 5700x)
  - network (bridged mode)
 
-# Installer
+## How to start
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo git net-tools nano
 
@@ -25,18 +25,18 @@ nano settings.env (update ur settings)
 Simply follow the steps in sequence and abit of common sense.
 
 
-### Configure ah-bot
+##### Configure ah-bot
 Create normal account and use script/find-character.sh 'charname' to find the accountId and characterId (GUID)
 and update your ah-mod config in the ./config folder and reapply the config and start the server again.
 
-# Client
+## Client
 3.3.5a (Chromiecraft)
 HD patch optional
 
-### ip server config
+##### ip server config
 Configure your server IP in 'data/enUS/realmlist.wtf' files
 
-### Addons (https://felbite.com/chromiecraft-addons):
+##### Addons (https://felbite.com/chromiecraft-addons):
 - Allstats
 - Mapster
 - Grid
@@ -45,7 +45,7 @@ Configure your server IP in 'data/enUS/realmlist.wtf' files
 - AI_VoiceOverData_Vanilla https://github.com/mrthinger/wow-voiceover/releases/download/v1.3.1/AI_VoiceOverData_Vanilla-v1.0.0.zip
 
 
-# Router port-forward if public
+## Router port-forward if public
 Use the above (ifconfig) IP for the following router poort-forwarding and/or firewall rules settings.
 ````
 # 3724 TCP AUTH-SERVER
