@@ -3,8 +3,9 @@
 ##########################################################################################
 # INTERNAL CONFIG
 ##########################################################################################
-AUTHSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-authserver"
-WORLDSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-worldserver"
+ACORE_SCRIPT="${ROOT_DIR}/_server/azerothcore/acore.sh"
+#AUTHSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-authserver"
+#WORLDSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-worldserver"
 AUTHSERVER_SESSION="auth-session"
 WORLDSERVER_SESSION="world-session"
 MYSQL_ROOT_PASSWORD="rootpassword"
@@ -40,8 +41,7 @@ echo "export REALM_NAME=${REALM_NAME}" >> ~/.bash_wow
 echo "export AH_BOT_MIN_ITEMS=${AH_BOT_MIN_ITEMS}" >> ~/.bash_wow
 echo "export AH_BOT_MAX_ITEMS=${AH_BOT_MAX_ITEMS}" >> ~/.bash_wow
 
-echo "export AUTHSERVER=${AUTHSERVER}" >> ~/.bash_wow
-echo "export WORLDSERVER=${WORLDSERVER}" >> ~/.bash_wow
+echo "export ACORE_SCRIPT=${ACORE_SCRIPT}" >> ~/.bash_wow
 echo "export AUTHSERVER_SESSION=${AUTHSERVER_SESSION}" >> ~/.bash_wow
 echo "export WORLDSERVER_SESSION=${WORLDSERVER_SESSION}" >> ~/.bash_wow
 echo "export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> ~/.bash_wow
