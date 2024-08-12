@@ -17,12 +17,10 @@ AUTHSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-authserver"
 WORLDSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-worldserver"
 AUTHSERVER_SESSION="auth-session"
 WORLDSERVER_SESSION="world-session"
-
 MYSQL_ROOT_PASSWORD=rootpassword
 MYSQL_USER=acore
 MYSQL_PASSWORD=acore
 MYSQL_DATABASE=acore_auth
-
 DATAPATH=${ROOT_DIR}/_server/azerothcore/env/dist/bin
 
 ##########################################################################################
@@ -39,10 +37,8 @@ else
 fi
     
 echo "ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
-
 echo "REALM_IP=${REALM_IP}" >> ~/.bash_wow
 echo "REALM_NAME=${REALM_NAME}" >> ~/.bash_wow
-
 echo "AH_BOT_MIN_ITEMS=${AH_BOT_MIN_ITEMS}" >> ~/.bash_wow
 echo "AH_BOT_MAX_ITEMS=${AH_BOT_MAX_ITEMS}" >> ~/.bash_wow
 
@@ -50,12 +46,10 @@ echo "AUTHSERVER=${AUTHSERVER}" >> ~/.bash_wow
 echo "WORLDSERVER=${WORLDSERVER}" >> ~/.bash_wow
 echo "AUTHSERVER_SESSION=${AUTHSERVER_SESSION}" >> ~/.bash_wow
 echo "WORLDSERVER_SESSION=${WORLDSERVER_SESSION}" >> ~/.bash_wow
-
 echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> ~/.bash_wow
 echo "MYSQL_USER=${MYSQL_USER}" >> ~/.bash_wow
 echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> ~/.bash_wow
 echo "MYSQL_DATABASE=${MYSQL_DATABASE}" >> ~/.bash_wow
-
 echo "DATAPATH=${DATAPATH}" >> ~/.bash_wow
 
 echo "alias update='${ROOT_DIR}/2_source-update.sh'" >> ~/.bash_wow
@@ -66,6 +60,7 @@ echo "alias start='${ROOT_DIR}/6_server-start.sh'" >> ~/.bash_wow
 echo "alias stop='tmux kill-server'" >> ~/.bash_wow
 echo "alias wow='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${WORLDSERVER_SESSION}'" >> ~/.bash_wow
 echo "alias auth='cd ${ROOT_DIR}/_server/azerothcore;tmux attach -t ${AUTHSERVER_SESSION}'" >> ~/.bash_wow
+
 echo " "
 echo "###########################################################################################"
 echo "## After the first install or changes either reboot or TYPE 'source ~/.bashrc' !!!!!!!!"
