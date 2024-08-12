@@ -37,21 +37,17 @@ fi
 echo "export ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
 echo "export REALM_IP=${REALM_IP}" >> ~/.bash_wow
 echo "export REALM_NAME=${REALM_NAME}" >> ~/.bash_wow
-
 echo "export AH_BOT_MIN_ITEMS=${AH_BOT_MIN_ITEMS}" >> ~/.bash_wow
 echo "export AH_BOT_MAX_ITEMS=${AH_BOT_MAX_ITEMS}" >> ~/.bash_wow
 
 echo "export AUTHSERVER=${AUTHSERVER}" >> ~/.bash_wow
 echo "export WORLDSERVER=${WORLDSERVER}" >> ~/.bash_wow
-
 echo "export AUTHSERVER_SESSION=${AUTHSERVER_SESSION}" >> ~/.bash_wow
 echo "export WORLDSERVER_SESSION=${WORLDSERVER_SESSION}" >> ~/.bash_wow
-
 echo "export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> ~/.bash_wow
 echo "export MYSQL_USER=${MYSQL_USER}" >> ~/.bash_wow
 echo "export MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> ~/.bash_wow
 echo "export MYSQL_DATABASE=${MYSQL_DATABASE}" >> ~/.bash_wow
-
 echo "export DATAPATH=${DATAPATH}" >> ~/.bash_wow
 
 ##########################################################################################
