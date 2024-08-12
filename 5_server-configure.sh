@@ -1,7 +1,4 @@
 #!/bin/bash
-ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-source ${ROOT_DIR}/variables.sh
-
 
 read -p "This will configur the server, are you sure? (Y)es/(N)o: " -n 1 -r
 echo " ";
