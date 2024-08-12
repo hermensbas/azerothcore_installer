@@ -15,15 +15,14 @@ sudo apt update -y && sudo apt upgrade -y && sudo git net-tools nano
 
 git clone https://github.com/hermensbas/azerothcore_installer.git
 cd azerothcore_installer.git
-
 chmod +x *.sh
-ifconfig (in order to find your ip)
 
+ifconfig (in order to find your ip)
 nano settings.env (update ur settings)
 
 ./setup.sh
 ```
-Simply follow the steps in sequence and abit of common sense obviously.
+Simply follow the steps in sequence and abit of common sense.
 
 
 ### Configure ah-bot
