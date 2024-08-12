@@ -25,19 +25,8 @@ then
     # Install core dependencies (https://www.azerothcore.org/wiki/linux-requirements)
     ##########################################################################################
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh install-deps && \
-        sudo apt-get update && \
-            sudo apt-get install \
-                git \
-                cmake \ 
-                make \ 
-                gcc \ 
-                g++ \
-                clang \ 
-                libmysqlclient-dev \ 
-                libssl-dev \
-                libbz2-dev libreadline-dev \
-                libncurses-dev mysql-server \ 
-                libboost-all-dev
+        sudo apt-get update -y && \
+        sudo apt-get install -y git cmake make gcc g++ clang libmysqlclient-dev libssl-dev libbz2-dev libreadline-dev libncurses-dev mysql-server libboost-all-dev
 
 
     ##########################################################################################
