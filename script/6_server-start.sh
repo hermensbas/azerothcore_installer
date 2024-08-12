@@ -39,19 +39,17 @@ else
 fi
 echo " "
 
-if tmux send-keys -t $AUTHSERVER_SESSION "$AUTHSERVER" C-m; then
-    echo "Executed \"$AUTHSERVER\" inside $AUTHSERVER_SESSION"
-    #echo "You can attach to $AUTHSERVER_SESSION and check the result using \"tmux attach -t $AUTHSERVER_SESSION\""
+if tmux send-keys -t $AUTHSERVER_SESSION "${SERVER_ROOT}/acore.sh run-authserver" C-m; then
+    echo "Executed \"${SERVER_ROOT}/acore.sh run-authserver \" inside $AUTHSERVER_SESSION"
 else
-    echo "Error when executing \"$AUTHSERVER\" inside $AUTHSERVER_SESSION"
+    echo "Error when executing \"${SERVER_ROOT}/acore.sh run-authserver\" inside $AUTHSERVER_SESSION"
 fi
 echo " "
 
-if tmux send-keys -t $WORLDSERVER_SESSION "$WORLDSERVER" C-m; then
-    echo "Executed \"$WORLDSERVER\" inside $WORLDSERVER_SESSION"
-    #echo "You can attach to $WORLDSERVER_SESSION and check the result using \"tmux attach -t $WORLDSERVER_SESSION\""
+if tmux send-keys -t $WORLDSERVER_SESSION "${SERVER_ROOT}/acore.sh run-worldserver" C-m; then
+    echo "Executed \"${SERVER_ROOT}/acore.sh run-worldserver\" inside $WORLDSERVER_SESSION"
 else
-    echo "Error when executing \"$WORLDSERVER\" inside $WORLDSERVER_SESSION"
+    echo "Error when executing \"${SERVER_ROOT}/acore.sh run-worldserver\" inside $WORLDSERVER_SESSION"
 fi
 
 echo " "
