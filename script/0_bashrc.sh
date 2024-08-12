@@ -39,7 +39,7 @@ echo "export DATAPATH=${DATAPATH}" >> ~/.bash_wow
 #----------------------------------------------------------------------------------------
 # Add alias to ~/.bash_wow
 #----------------------------------------------------------------------------------------
-echo "alias menu='${ROOT_DIR}/menu.sh'" >> ~/.bash_wow
+echo "alias menu='${ROOT_DIR}/script/menu.sh'" >> ~/.bash_wow
 echo "alias install='${ROOT_DIR}/script/1_source-install.sh'" >> ~/.bash_wow
 echo "alias update='${ROOT_DIR}/script/2_source-update.sh'" >> ~/.bash_wow
 echo "alias build='${ROOT_DIR}/script/3_server-build.sh'" >> ~/.bash_wow
