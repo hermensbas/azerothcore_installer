@@ -1,6 +1,4 @@
 #!/bin/bash
-ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-
 
 ##########################################################################################
 # General dependencies
@@ -14,7 +12,7 @@ then
     ##########################################################################################
     # Try to merge from the orginal azerothcore into the playerbot azerothcore fork branch
     ##########################################################################################
-    cd ${ROOT_DIR}/../_download/azerothcore
+    cd ${ROOT_DIR}/_download/azerothcore
     git reset --hard origin/Playerbot   
     git fetch upstream
     git merge upstream/master 
