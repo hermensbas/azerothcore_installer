@@ -1,13 +1,26 @@
 #!/bin/bash
 
-#----------------------------------------------------------------------------------------
+##########################################################################################
+# INTERNAL CONFIG
+##########################################################################################
+AUTHSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-authserver"
+WORLDSERVER="${ROOT_DIR}/_server/azerothcore/acore.sh run-worldserver"
+AUTHSERVER_SESSION="auth-session"
+WORLDSERVER_SESSION="world-session"
+MYSQL_ROOT_PASSWORD="rootpassword"
+MYSQL_USER="acore"
+MYSQL_PASSWORD="acore"
+MYSQL_DATABASE="acore_auth"
+DATAPATH="${ROOT_DIR}/_server/azerothcore/env/dist/bin"
+
+##########################################################################################
 # add chmod rights
-#----------------------------------------------------------------------------------------
+##########################################################################################
 sudo chmod +x ${ROOT_DIR}/script/*.sh
 
-#----------------------------------------------------------------------------------------
-# Add ~/.bash_wow to ~/.bashrc if not exist
-#----------------------------------------------------------------------------------------
+##########################################################################################
+# add ~/.bash_wow to ~/.bashrc if not exist
+##########################################################################################
 if grep -R "bash_wow" ~/.bashrc
 then
     echo "bash_wow exists";
@@ -18,9 +31,9 @@ else
     echo "fi" >> ~/.bashrc
 fi
 
-#----------------------------------------------------------------------------------------
-# Add variables to ~/.bash_wow
-#----------------------------------------------------------------------------------------
+##########################################################################################
+# add variables to ~/.bash_wow
+##########################################################################################
 echo "export ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
 echo "export REALM_IP=${REALM_IP}" >> ~/.bash_wow
 echo "export REALM_NAME=${REALM_NAME}" >> ~/.bash_wow
@@ -36,9 +49,9 @@ echo "export MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> ~/.bash_wow
 echo "export MYSQL_DATABASE=${MYSQL_DATABASE}" >> ~/.bash_wow
 echo "export DATAPATH=${DATAPATH}" >> ~/.bash_wow
 
-#----------------------------------------------------------------------------------------
-# Add alias to ~/.bash_wow
-#----------------------------------------------------------------------------------------
+##########################################################################################
+#  add alias to ~/.bash_wow
+##########################################################################################
 echo "alias menu='${ROOT_DIR}/script/menu.sh'" >> ~/.bash_wow
 echo "alias install='${ROOT_DIR}/script/1_source-install.sh'" >> ~/.bash_wow
 echo "alias update='${ROOT_DIR}/script/2_source-update.sh'" >> ~/.bash_wow
