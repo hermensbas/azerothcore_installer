@@ -3,22 +3,22 @@
 ##########################################################################################
 # Apply server realm configuration
 ##########################################################################################
-source ${ROOT_DIR}/helper/update_realm_ip.sh ${REALM_IP}
-source ${ROOT_DIR}/helper/update_realm_ip.sh ${REALM_NAME}
+source ${ROOT_DIR}/scripts/update_realm_ip.sh ${REALM_IP}
+source ${ROOT_DIR}/scripts/update_realm_ip.sh ${REALM_NAME}
 echo " "
 
 
 ##########################################################################################
 # Apply ah-bot custom configuration
 ##########################################################################################
-source ${ROOT_DIR}/helper/update_ahbot_config.sh ${AH_BOT_MIN_ITEMS} ${AH_BOT_MAX_ITEMS}
+source ${ROOT_DIR}/scripts/update_ahbot_config.sh ${AH_BOT_MIN_ITEMS} ${AH_BOT_MAX_ITEMS}
 echo " "
 
 
 ##########################################################################################
 # Clear playerbots account and characters (enforces performance and bot levels balance)
 ##########################################################################################
-source ${ROOT_DIR}/helper/clear_playerbots.sh
+source ${ROOT_DIR}/scripts/clear_playerbots.sh
 echo " "
 
 
@@ -57,6 +57,7 @@ fi
 echo " "
 echo "###########################################################################################"
 echo "## After the above you can use the following commands:"
+echo "### install -  Install and download the source-code repo's"
 echo "### update  -  Updates source-code to latest version"
 echo "### build   -  Builds the server based on source-code"
 echo "### compile -  Compiles the code based on the build server"
