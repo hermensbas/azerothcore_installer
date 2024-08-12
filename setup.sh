@@ -11,7 +11,7 @@ set +a # stop exporting
 ##########################################################################################
 # Import system vars and aliases into ~/.bashrc
 ##########################################################################################
-source ${ROOT_DIR}/script/0_bashrc.sh
+source ${ROOT_DIR}/script/0_variables.sh
 echo " "
 echo "###########################################################################################"
 echo "## After first run TYPE 'source ~/.bashrc' !!!!!!!!"
