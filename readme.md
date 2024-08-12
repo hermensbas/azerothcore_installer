@@ -51,3 +51,12 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 # 3724 TCP AUTH-SERVER
 # 8085 TCP WORLD-SERVER
 ````
+
+## Create account
+world-server
+```bash
+> acccount create ahbot mypass 
+
+> acccount create admin mypass
+> account set gmlevel 3 -1 
+```
