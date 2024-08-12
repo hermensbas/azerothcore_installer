@@ -55,4 +55,4 @@ else
 fi
 
 echo " "
-source ${ROOT_DIR}/script/menu-print.sh
+source ${ROOT_DIR}/script/menu.sh
