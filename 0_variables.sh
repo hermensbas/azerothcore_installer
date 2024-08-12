@@ -9,6 +9,7 @@ REALM_NAME="azerothcore.org"
 AH_BOT_MIN_ITEMS="15000"
 AH_BOT_MAX_ITEMS="20000"
 
+
 ##########################################################################################
 # INTERNAL CONFIGS
 # https://github.com/azerothcore/azerothcore-wotlk/blob/master/conf/dist
