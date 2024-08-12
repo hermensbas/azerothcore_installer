@@ -5,7 +5,7 @@ export ROOT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 # USER CONFIG
 ##########################################################################################
 set -a # export all variables created next
-source USER.ENV
+source settings.env
 set +a # stop exporting
 
 ##########################################################################################
