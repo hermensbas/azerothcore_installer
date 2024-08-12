@@ -64,6 +64,7 @@ echo "export DATAPATH=${DATAPATH}" >> ~/.bash_wow
 #----------------------------------------------------------------------------------------
 # Add alias to ~/.bash_wow
 #----------------------------------------------------------------------------------------
+echo "alias install='${ROOT_DIR}/1_source-install.sh'" >> ~/.bash_wow
 echo "alias update='${ROOT_DIR}/2_source-update.sh'" >> ~/.bash_wow
 echo "alias build='${ROOT_DIR}/3_server-build.sh'" >> ~/.bash_wow
 echo "alias compile='${ROOT_DIR}/4_server-compile.sh'" >> ~/.bash_wow
@@ -81,6 +82,7 @@ echo "##########################################################################
 echo "## After the first install or changes either reboot or TYPE 'source ~/.bashrc' !!!!!!!!"
 echo "###########################################################################################"
 echo "## After the above you can use the following commands:"
+echo "### install -  Download the source source-code"
 echo "### update  -  Updates source-code to latest version"
 echo "### build   -  Builds the server based on source-code"
 echo "### compile -  Compiles the code based on the build server"
