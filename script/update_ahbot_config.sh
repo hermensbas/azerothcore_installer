@@ -19,7 +19,7 @@ fi
 
 sed -e "s/{{AH_BOT_MIN_ITEMS}}/$AH_BOT_MIN_ITEMS/g" \
     -e "s/{{AH_BOT_MAX_ITEMS}}/$AH_BOT_MAX_ITEMS/g" \
-    "${ROOT_DIR}/../sql/update_ahbot_config.sql" > "/tmp/update_ahbot_config.sql"
+    "${ROOT_DIR}/sql/update_ahbot_config.sql" > "/tmp/update_ahbot_config.sql"
 sudo mysql -u root --database="acore_characters" < /tmp/update_ahbot_config.sql
 
 
