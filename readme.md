@@ -1,4 +1,5 @@
 # azerothcore_installer
+For development and play
 
 ## Server setup
  - vmware player
@@ -10,7 +11,7 @@
  - network (bridged mode)
 
 ## How to start
-### 1
+### Step 1
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo apt install -y git net-tools nano
 
@@ -23,10 +24,14 @@ nano settings.env (update ur settings)
 
 ./setup.sh
  source ~/.bashrc
-```
-Simply follow the steps in sequence and abit of common sense, first run till config step.
 
-### 2
+update
+build
+compile
+config
+```
+
+### Step 2
 disable playerbots
 ```bash
 nano config/modules/playerbots.config
@@ -42,28 +47,31 @@ AuctionHouseBot.EnableSeller = 0
 AuctionHouseBot.EnableBuyer = 0
 ```
 
-### 3
-start the server
+### Step 3
+Start the server
 ```bash
 start
 ```
 
-create accounts
+Create accounts
 ```bash
 > acccount create ahbot mypass 
 > acccount create admin mypass
 > account set gmlevel 3 -1 
 ```
 
-### 4 
-logon the server with 'ahbot' and create lvl 1 char and logoff again.
+### Step 4 
+Logon the server with 'ahbot' and create lvl 1 char and logoff again.
 
 Find ah-bot character settings
 ```bash
-./script/find-character.sh
+./script/find-character.sh ahbot
+accountId       characterName   characterId
+1       Yappe   1
+Find character executed...
 ```
 
-configure and enable ahbot
+Configure and enable ahbot
 ```bash
 nano config/modules/mod_ahbot.config
 AuctionHouseBot.Account = 1
@@ -72,18 +80,24 @@ AuctionHouseBot.EnableSeller = 1
 AuctionHouseBot.EnableBuyer = 1
 ```
 
-enable playerbots
+Enable playerbots
 ```bash
 nano config/modules/playerbots.config
 AiPlayerbot.Enabled = 1
 ```
 
-update config
+### Step 5 
+Update server config
 ```bash
 update
 ```
 
-and finally restart the server.
+Restart the server.
+```bash
+ctrl + z
+stop
+start
+```
 
 ## Client
 3.3.5a (Chromiecraft)
