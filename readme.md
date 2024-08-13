@@ -10,6 +10,7 @@
  - network (bridged mode)
 
 ## How to start
+### 1
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo apt install -y git net-tools nano
 
@@ -23,8 +24,66 @@ nano settings.env (update ur settings)
 ./setup.sh
  source ~/.bashrc
 ```
-Simply follow the steps in sequence and abit of common sense.
+Simply follow the steps in sequence and abit of common sense, first run till config step.
 
+### 2
+disable playerbots
+```bash
+nano config/modules/playerbots.config
+AiPlayerbot.Enabled = 0
+```
+
+disable ahbot
+```bash
+nano config/modules/mod_ahbot.config
+AuctionHouseBot.Account = 0
+AuctionHouseBot.GUID = 0
+AuctionHouseBot.EnableSeller = 0
+AuctionHouseBot.EnableBuyer = 0
+```
+
+### 3
+start the server
+```bash
+start
+```
+
+create accounts
+```bash
+> acccount create ahbot mypass 
+> acccount create admin mypass
+> account set gmlevel 3 -1 
+```
+
+### 4 
+logon the server with 'ahbot' and create lvl 1 char and logoff again.
+
+Find ah-bot character settings
+```bash
+./script/find-character.sh
+```
+
+configure and enable ahbot
+```bash
+nano config/modules/mod_ahbot.config
+AuctionHouseBot.Account = 1
+AuctionHouseBot.GUID = 1
+AuctionHouseBot.EnableSeller = 1
+AuctionHouseBot.EnableBuyer = 1
+```
+
+enable playerbots
+```bash
+nano config/modules/playerbots.config
+AiPlayerbot.Enabled = 1
+```
+
+update config
+```bash
+update
+```
+
+and finally restart the server.
 
 ## Client
 3.3.5a (Chromiecraft)
@@ -40,19 +99,6 @@ Configure your server IP in 'data/enUS/realmlist.wtf' files
 - UnBot ([english version](https://github.com/noisiver/unbot-addon/tree/english)) 
 - AI_VoiceOver https://github.com/mrthinger/wow-voiceover/releases/download/v1.4.3/AI_VoiceOver-WoW_3.3.5-v1.4.3.zip
 - AI_VoiceOverData_Vanilla https://github.com/mrthinger/wow-voiceover/releases/download/v1.3.1/AI_VoiceOverData_Vanilla-v1.0.0.zip
-
-## Create account
-world-server
-```bash
-> acccount create ahbot mypass 
-
-> acccount create admin mypass
-> account set gmlevel 3 -1 
-```
-
-## Configure ah-bot
-Create normal account and logon and create a level 1 character and logout, then use script/find-character.sh 'accountName' to find the accountId and characterId (GUID)
-and update your ah-mod config in the ./config folder and reapply the config and start the server again.
 
 ## Router port-forward if public
 Use the above (ifconfig) IP for the following router poort-forwarding and/or firewall rules settings.
