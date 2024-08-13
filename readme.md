@@ -21,6 +21,7 @@ ifconfig (in order to find your ip)
 nano settings.env (update ur settings)
 
 ./setup.sh
+ source ~/.bashrc
 ```
 Simply follow the steps in sequence and abit of common sense.
 
