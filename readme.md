@@ -28,7 +28,6 @@ nano settings.env (update ur settings)
 update
 build
 compile
-config
 ```
 
 ### Step 2
@@ -50,6 +49,7 @@ AuctionHouseBot.EnableBuyer = 0
 ### Step 3
 Start the server
 ```bash
+config
 start
 ```
 
@@ -87,15 +87,12 @@ AiPlayerbot.Enabled = 1
 ```
 
 ### Step 5 
-Update server config
-```bash
-update
-```
 
-Restart the server.
+Stop server, re-apply configuration, and start server
 ```bash
 ctrl + z
 stop
+config
 start
 ```
 
