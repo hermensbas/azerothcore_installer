@@ -6,15 +6,6 @@
 SERVER_ROOT="${ROOT_DIR}/_server/azerothcore"
 DATAPATH="${SERVER_ROOT}/env/dist/bin"
 
-AC_WOTLK_REPO="https://github.com/liyunfan1223/azerothcore-wotlk.git"
-AC_WOTLK_REPO_BRANCH="Playerbot"
-
-AC_MODE_PLAYER_BOTS_REPO="https://github.com/liyunfan1223/mod-playerbots.git"
-AC_MODE_PLAYER_BOTS_REPO_BRANCH="master"
-
-AC_MODE_AHBOT_REPO="https://github.com/azerothcore/mod-ah-bot.git"
-AC_MODE_AHBOT_REPO_BRANCH="master"
-
 AUTHSERVER_SESSION="auth-session"
 WORLDSERVER_SESSION="world-session"
 
@@ -23,10 +14,12 @@ MYSQL_USER="acore"
 MYSQL_PASSWORD="acore"
 MYSQL_DATABASE="acore_auth"
 
+
 ##########################################################################################
 # add chmod rights
 ##########################################################################################
 sudo chmod +x ${ROOT_DIR}/script/*.sh
+
 
 ##########################################################################################
 # add ~/.bash_wow to ~/.bashrc if not exist
@@ -40,6 +33,7 @@ else
     echo "  . ~/.bash_wow" >> ~/.bashrc
     echo "fi" >> ~/.bashrc
 fi
+
 
 ##########################################################################################
 # add variables to ~/.bash_wow
@@ -71,6 +65,7 @@ echo "export REALM_NAME=${REALM_NAME}" >> ~/.bash_wow
 
 echo "export AH_BOT_MIN_ITEMS=${AH_BOT_MIN_ITEMS}" >> ~/.bash_wow
 echo "export AH_BOT_MAX_ITEMS=${AH_BOT_MAX_ITEMS}" >> ~/.bash_wow
+
 
 ##########################################################################################
 #  add alias to ~/.bash_wow
