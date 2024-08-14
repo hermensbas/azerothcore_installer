@@ -16,7 +16,7 @@ then
     ##########################################################################################
     git -C ${ROOT_DIR}/_download/azerothcore fetch origin
     git -C ${ROOT_DIR}/_download/azerothcore clean -fd
-    git -C ${ROOT_DIR}/_download/azerothcore reset --hard origin/Playerbot   
+    git -C ${ROOT_DIR}/_download/azerothcore reset --hard origin/${AC_WOTLK_REPO_BRANCH}   
 
 
     ##########################################################################################
@@ -24,7 +24,7 @@ then
     ##########################################################################################
     git -C ${ROOT_DIR}/_download/modules/mod-playerbots fetch origin
     git -C ${ROOT_DIR}/_download/modules/mod-playerbots clean -fd
-    git -C ${ROOT_DIR}/_download/modules/mod-playerbots reset --hard origin/master
+    git -C ${ROOT_DIR}/_download/modules/mod-playerbots reset --hard origin/${AC_MODE_PLAYER_BOTS_REPO_BRANCH}
 
 
     ##########################################################################################
@@ -32,7 +32,7 @@ then
     ##########################################################################################
     git -C ${ROOT_DIR}/_download/modules/mod-ah-bot fetch origin
     git -C ${ROOT_DIR}/_download/modules/mod-ah-bot clean -fd
-    git -C ${ROOT_DIR}/_download/modules/mod-ah-bot reset --hard origin/master
+    git -C ${ROOT_DIR}/_download/modules/mod-ah-bot reset --hard origin/${AC_MODE_AHBOT_REPO_BRANCH}
 
 
     echo "Executed..."
