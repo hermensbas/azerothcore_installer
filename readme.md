@@ -7,7 +7,7 @@ For development and play
  - minimal setup
  - 70GB disksize (minimal 50GB)
  - 16 GB memorysize
- - 6 cores (amd 5700x)
+ - 8 cores (amd 5700x)
  - network (bridged mode)
 
 ## How to start
