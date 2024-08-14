@@ -25,7 +25,7 @@ then
     ##########################################################################################
     sudo rm -rf ${ROOT_DIR}/_download/azerothcore > /dev/null 2>&1
     git config --global --add safe.directory "${ROOT_DIR}/_download/azerothcore"
-    git clone https://github.com/liyunfan1223/azerothcore-wotlk.git --branch=Playerbot ${ROOT_DIR}/_download/azerothcore
+    git clone ${AC_WOTLK_REPO} --branch=Playerbot ${ROOT_DIR}/_download/azerothcore
 
 
     ##########################################################################################
@@ -33,7 +33,7 @@ then
     ##########################################################################################
     sudo rm -rf ${ROOT_DIR}/_download/modules/mod-playerbots > /dev/null 2>&1
     git config --global --add safe.directory "${ROOT_DIR}/_download/modules/mod-playerbots"
-    git clone https://github.com/liyunfan1223/mod-playerbots.git ${ROOT_DIR}/_download/modules/mod-playerbots 
+    git clone ${AC_MODE_PLAYER_BOTS_REPO} ${ROOT_DIR}/_download/modules/mod-playerbots 
 
 
     ##########################################################################################
@@ -41,7 +41,7 @@ then
     ##########################################################################################
     sudo rm -rf ${ROOT_DIR}/_download/modules/mod-ah-bot > /dev/null 2>&1
     git config --global --add safe.directory "${ROOT_DIR}/_download/modules/mod-ah-bot"
-    git clone https://github.com/azerothcore/mod-ah-bot.git ${ROOT_DIR}/_download/modules/mod-ah-bot
+    git clone ${AC_MODE_AHBOT_REPO} ${ROOT_DIR}/_download/modules/mod-ah-bot
 
 
     ##########################################################################################
