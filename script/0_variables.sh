@@ -3,6 +3,9 @@
 ##########################################################################################
 # INTERNAL CONFIG
 ##########################################################################################
+SERVER_ROOT="${ROOT_DIR}/_server/azerothcore"
+DATAPATH="${SERVER_ROOT}/env/dist/bin"
+
 AC_WOTLK_REPO="https://github.com/liyunfan1223/azerothcore-wotlk.git"
 AC_WOTLK_REPO_BRANCH="Playerbot"
 
@@ -11,9 +14,6 @@ AC_MODE_PLAYER_BOTS_REPO_BRANCH="master"
 
 AC_MODE_AHBOT_REPO="https://github.com/azerothcore/mod-ah-bot.git"
 AC_MODE_AHBOT_REPO_BRANCH="master"
-
-SERVER_ROOT="${ROOT_DIR}/_server/azerothcore"
-DATAPATH="${SERVER_ROOT}/env/dist/bin"
 
 AUTHSERVER_SESSION="auth-session"
 WORLDSERVER_SESSION="world-session"
@@ -46,6 +46,16 @@ fi
 ##########################################################################################
 echo "export ROOT_DIR=${ROOT_DIR}" > ~/.bash_wow
 echo "export SERVER_ROOT=${SERVER_ROOT}" >> ~/.bash_wow
+
+echo "export AC_WOTLK_REPO=${AC_WOTLK_REPO}" >> ~/.bash_wow
+echo "export AC_WOTLK_REPO_BRANCH=${AC_WOTLK_REPO_BRANCH}" >> ~/.bash_wow
+
+echo "export AC_MODE_PLAYER_BOTS_REPO=${AC_MODE_PLAYER_BOTS_REPO}" >> ~/.bash_wow
+echo "export AC_MODE_PLAYER_BOTS_REPO_BRANCH=${AC_MODE_PLAYER_BOTS_REPO_BRANCH}" >> ~/.bash_wow
+
+echo "export AC_MODE_AHBOT_REPO=${AC_MODE_AHBOT_REPO}" >> ~/.bash_wow
+echo "export AC_MODE_AHBOT_REPO_BRANCH=${AC_MODE_AHBOT_REPO_BRANCH}" >> ~/.bash_wow
+
 echo "export DATAPATH=${DATAPATH}" >> ~/.bash_wow
 
 echo "export AUTHSERVER_SESSION=${AUTHSERVER_SESSION}" >> ~/.bash_wow
