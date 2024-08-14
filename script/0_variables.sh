@@ -4,8 +4,11 @@
 # INTERNAL CONFIG
 ##########################################################################################
 AC_WOTLK_REPO="https://github.com/liyunfan1223/azerothcore-wotlk.git"
+AC_WOTLK_REPO_BRANCH="Playerbot"
 AC_MODE_PLAYER_BOTS_REPO="https://github.com/liyunfan1223/mod-playerbots.git"
+AC_MODE_PLAYER_BOTS_REPO_BRANCH="master"
 AC_MODE_AHBOT_REPO="https://github.com/azerothcore/mod-ah-bot.git"
+AC_MODE_AHBOT_REPO_BRANCH="master"
 
 
 SERVER_ROOT="${ROOT_DIR}/_server/azerothcore"
