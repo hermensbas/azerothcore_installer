@@ -118,15 +118,6 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 # 8085 TCP WORLD-SERVER
 ````
 
-## useful bot commands 
-See mod-playerbot/src/strategy/actions/ChatActionContext.h | cpp
-```bash
-.playerbot bot init=white | common | uncommon | rare | epic | legendary
-.playerbot bot init=MaxItemLevel
-autogear (whenever init is broken)
-maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
-```
-
 ## useful AC GM commands
 ```bash
 .server info (shows latency and amount of bots)
@@ -138,4 +129,21 @@ maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
 .learn all my class
 .level <amount of levels to add>
 .character level <name> <level>
+```
+
+## useful bot commands 
+See mod-playerbot/src/strategy/actions/ChatActionContext.h | cpp
+See mod-playerbot/src/strategy/action/ActionContext.h | cpp
+See mod-playerbot/src/ChatFilter.ccp
+See unbot add-on tooltips
+
+```bash
+unbot has init=auto but that doesnt always work, esp when ur level 1 (for now)
+Alternativy use the following or when the bots are to strong you can lower the equipment
+.playerbot bot init=white | common | uncommon | rare | epic | legendary
+.playerbot bot init=MaxItemLevel
+autogear (whenever init is broken, max equipment levelItem configured in playerbot.conf)
+maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
+
+# After init or respect reset bot AI (unbot)
 ```
