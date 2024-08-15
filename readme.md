@@ -103,13 +103,13 @@ HD patch optional
 ##### ip server config
 Configure your server IP in 'data/enUS/realmlist.wtf' files
 
-##### Addons (https://felbite.com/chromiecraft-addons):
+##### Addons ([download](https://felbite.com/chromiecraft-addons)):
 - Allstats
 - Mapster (map fog disabled, we wanna explore instead seeing the whole map out of the box)
 - Grid
 - UnBot ([english version](https://github.com/noisiver/unbot-addon/tree/english)) 
-- AI_VoiceOver https://github.com/mrthinger/wow-voiceover/releases/download/v1.4.3/AI_VoiceOver-WoW_3.3.5-v1.4.3.zip
-- AI_VoiceOverData_Vanilla https://github.com/mrthinger/wow-voiceover/releases/download/v1.3.1/AI_VoiceOverData_Vanilla-v1.0.0.zip
+- [AI_VoiceOver](https://github.com/mrthinger/wow-voiceover/releases/download/v1.4.3/AI_VoiceOver-WoW_3.3.5-v1.4.3.zip)
+- [AI_VoiceOverData_Vanilla](https://github.com/mrthinger/wow-voiceover/releases/download/v1.3.1/AI_VoiceOverData_Vanilla-v1.0.0.zip)
 
 ## Router port-forward if public
 Use the above (ifconfig) IP for the following router poort-forwarding and/or firewall rules settings.
@@ -119,7 +119,7 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 ````
 
 ## useful AC GM commands
-[Reference](https://www.azerothcore.org/wiki/gm-commands)
+[Wiki reference](https://www.azerothcore.org/wiki/gm-commands)
 ```bash
 .server info (shows latency and amount of bots)
 .modify speed <default 1>
