@@ -130,6 +130,7 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 .learn all my class
 .level <amount of levels to add>
 .character level <name> <level>
+.teleport orgrimmar or .tel orgrimmar)
 ```
 
 ## useful bot commands 
