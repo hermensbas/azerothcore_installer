@@ -119,6 +119,7 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 ````
 
 ## useful AC GM commands
+[Reference](https://www.azerothcore.org/wiki/gm-commands)
 ```bash
 .server info (shows latency and amount of bots)
 .modify speed <default 1>
