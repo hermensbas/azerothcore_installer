@@ -97,7 +97,7 @@ start
 ```
 
 ## Client
-3.3.5a (Chromiecraft)
+3.3.5a (Chromiecraft.com)
 HD patch optional
 
 ##### ip server config
