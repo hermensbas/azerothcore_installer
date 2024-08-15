@@ -105,7 +105,7 @@ Configure your server IP in 'data/enUS/realmlist.wtf' files
 
 ##### Addons (https://felbite.com/chromiecraft-addons):
 - Allstats
-- Mapster
+- Mapster (map fog disabled, we wanna explore instead seeing the whole map out of the box)
 - Grid
 - UnBot ([english version](https://github.com/noisiver/unbot-addon/tree/english)) 
 - AI_VoiceOver https://github.com/mrthinger/wow-voiceover/releases/download/v1.4.3/AI_VoiceOver-WoW_3.3.5-v1.4.3.zip
@@ -117,3 +117,25 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 # 3724 TCP AUTH-SERVER
 # 8085 TCP WORLD-SERVER
 ````
+
+## useful bot commands 
+See mod-playerbot/src/strategy/actions/ChatActionContext.h | cpp
+```bash
+.playerbot bot init=white | common | uncommon | rare | epic | legendary
+.playerbot bot init=MaxItemLevel
+autogear (whenever init is broken)
+maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
+```
+
+## useful AC GM commands
+```bash
+.server info (shows latency and amount of bots)
+.modify speed <default 1>
+.modify money
+.appear
+.server shutdown 5
+.maxskill
+.learn all my class
+.level <amount of levels to add>
+.character level <name> <level>
+```
