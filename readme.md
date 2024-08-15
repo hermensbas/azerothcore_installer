@@ -135,6 +135,7 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 See mod-playerbot/src/strategy/actions/ChatActionContext.h | cpp
 See mod-playerbot/src/strategy/action/ActionContext.h | cpp
 See mod-playerbot/src/ChatFilter.ccp
+See mod-playerbot/src/PlayerbotMgr.cpp (around line 700 or search 'init='
 See unbot add-on tooltips
 
 ```bash
