@@ -140,8 +140,8 @@ Code references
 - See unbot add-on tooltips
 
 ```bash
-unbot has init=auto but that doesnt always work, esp when ur level 1 (for now)
-Alternativy use the following or when the bots are to strong you can lower the equipment
+# Unbot has init=auto but that doesnt always work, esp when ur level 1 (for now) alternativy use
+# the following or when the bots are to strong you can lower the equipment.
 
 .playerbot bot init=white | common | uncommon | rare | epic | legendary
 
@@ -151,5 +151,5 @@ autogear (whenever init is broken, max equipment levelItem configured in playerb
 
 maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
 
-# After init or respect reset bot AI (unbot)
+# After init or talents respec make sure you reset bot AI (see unbot).
 ```
