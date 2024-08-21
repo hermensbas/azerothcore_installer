@@ -1,4 +1,5 @@
 DELETE FROM `acore_playerbots`.`playerbots_random_bots`;
+UPDATE `acore_characters`.`playerbots_names` SET `in_use`=0;
 DELETE FROM `acore_characters`.`characters` WHERE `account` IN (SELECT `id` FROM `acore_auth`.`account` WHERE `username` LIKE 'RNDBOT%') OR `account` NOT IN (SELECT `id` FROM `acore_auth`.`account`);
 DELETE FROM `acore_characters`.`character_account_data` WHERE `guid` NOT IN (SELECT `guid` FROM `acore_characters`.`characters`);
 DELETE FROM `acore_characters`.`character_achievement` WHERE `guid` NOT IN (SELECT `guid` FROM `acore_characters`.`characters`);
