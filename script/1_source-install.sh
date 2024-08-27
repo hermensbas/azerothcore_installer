@@ -59,6 +59,12 @@ then
     ##########################################################################################
     cd ${ROOT_DIR}/_download/azerothcore && git remote add upstream https://github.com/azerothcore/azerothcore-wotlk.git
 
+
+    ##########################################################################################
+    # set folder rights to current user
+    ##########################################################################################
+    sudo chown -R $USER ${ROOT_DIR}
+
     
     echo "Executed..."
 
