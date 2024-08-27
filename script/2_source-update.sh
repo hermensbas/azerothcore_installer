@@ -35,12 +35,6 @@ then
     git -C ${ROOT_DIR}/_download/modules/mod-ah-bot reset --hard origin/${AC_MODE_AHBOT_REPO_BRANCH}
 
 
-    ##########################################################################################
-    # set folder rights to current user
-    ##########################################################################################
-    sudo chown -R $USER ${ROOT_DIR}
-
-
     echo "Executed..."
 
 fi
