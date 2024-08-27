@@ -31,9 +31,9 @@ then
 
 
     ##########################################################################################
-    # Ensure all folder and files are accesible for the current user
+    # set folder rights to current user
     ##########################################################################################
-    sudo find ${ROOT_DIR}/_server/ -user root -exec sudo chown $USER: {} +
+    sudo chown -R $USER ${ROOT_DIR}
 
 
     echo "Executed..."
