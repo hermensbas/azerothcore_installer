@@ -26,6 +26,10 @@ then
     unzip ${ROOT_DIR}/_data/data.zip -d ${DATAPATH} || exit 1
 
 
+    ##########################################################################################
+    # set folder rights to current user
+    ##########################################################################################
+    sudo chown -R $USER ${ROOT_DIR}
 
     echo "Executed..."
 
