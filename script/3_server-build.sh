@@ -30,6 +30,7 @@ then
     # set folder rights to current user
     ##########################################################################################
     sudo chown -R $USER ${ROOT_DIR}
+    
 
     echo "Executed..."
 
