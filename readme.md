@@ -97,8 +97,10 @@ start
 ```
 
 ## Client
-3.3.5a (Chromiecraft.com)
-- HD patch optional or 2024 [23GB graphic patch](https://github.com/Marotheit/A-Guide-to-Modernizing-the-WotLK-Client/) 
+- 3.3.5a (Chromiecraft.com)
+ - Chromiecraft HD patch optional or huge patch 2024 [23GB graphic patch](https://github.com/Marotheit/A-Guide-to-Modernizing-the-WotLK-Client/)
+
+Personally i prefere the chromiecraft HD patch without the T-patch, blizzlike :)
 
 ##### ip server config
 Configure your server IP in 'data/enUS/realmlist.wtf' files
