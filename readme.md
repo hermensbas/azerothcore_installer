@@ -2,11 +2,7 @@
 For development and play
 
 
-<iframe width="560" height="315"
-src="[https://www.youtube.com/embed/MUQfKFzIOeU](https://www.youtube.com/watch?v=iCn14KLCerY)" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+https://www.youtube.com/watch?v=voW3Xs2f3pU
 
 ## Server setup
  - vmware player
