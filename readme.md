@@ -136,6 +136,8 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 .level <amount of levels to add>
 .character level <name> <level>
 .teleport orgrimmar or .tel orgrimmar)
+.leave (when you want the group to leave you alone!)
+.addItem itemName (or ctrl+click the item) 
 ```
 
 ## useful bot commands 
