@@ -128,6 +128,7 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 ```bash
 .server info (shows latency and amount of bots)
 .modify speed <default 1>
+.gm fly on | off
 .modify money
 .appear
 .server shutdown 5
