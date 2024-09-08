@@ -1,6 +1,13 @@
 # azerothcore_installer
 For development and play
 
+
+<iframe width="560" height="315"
+src="[https://www.youtube.com/embed/MUQfKFzIOeU](https://www.youtube.com/watch?v=iCn14KLCerY)" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
 ## Server setup
  - vmware player
  - ubuntu-24.04-live-server-amd64.iso
