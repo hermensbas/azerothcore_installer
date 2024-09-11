@@ -60,7 +60,7 @@ Create accounts
 ```bash
 > acccount create ahbot mypass 
 > acccount create admin mypass
-> account set gmlevel 3 -1 
+> account admin set gmlevel 3 -1 
 ```
 
 ### Step 4 
