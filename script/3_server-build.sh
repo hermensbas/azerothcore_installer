@@ -27,6 +27,14 @@ then
 
 
     ##########################################################################################
+    # Copy mod sql scripts into server custom foldets
+    ##########################################################################################
+    mkdir -p ${ROOT_DIR}/_server/azerothcore/data/sql/custom/db_world && \
+        cp -r ${ROOT_DIR}/_download/modules/mod-ah-bot/data/sql/db-world/mod_auctionhousebot.sql \
+            ${ROOT_DIR}/_server/azerothcore/data/sql/custom/db_world/ 
+
+
+    ##########################################################################################
     # set folder rights to current user
     ##########################################################################################
     sudo chown -R $USER ${ROOT_DIR}
