@@ -27,7 +27,7 @@ then
 
 
     ##########################################################################################
-    # Copy mod sql scripts into server custom foldets
+    # Copy certain mod sql scripts into server custom folders (only if required)
     ##########################################################################################
     mkdir -p ${ROOT_DIR}/_server/azerothcore/data/sql/custom/db_world && \
         cp -r ${ROOT_DIR}/_download/modules/mod-ah-bot/data/sql/db-world/mod_auctionhousebot.sql \
