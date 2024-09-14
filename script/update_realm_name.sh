@@ -10,7 +10,7 @@ fi
 
 sed -e "s/{{REALM_NAME}}/$REALM_NAME/g" \
     "${ROOT_DIR}/sql/update_realm_name.sql" > "/tmp/update_realm_name.sql"
-sudo mysql -u root -p --database="acore_characters" < /tmp/update_realm_name.sql
+sudo mysql -u root --database="acore_characters" < /tmp/update_realm_name.sql
 
 echo " "
 echo "###########################################################################################"
