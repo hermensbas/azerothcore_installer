@@ -14,10 +14,10 @@ then
     ##########################################################################################
     # Create acore account
     ##########################################################################################
-    sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS acore_auth;"
-    sudo mysql -u root -e "CREATE USER IF NOT EXISTS 'acore'@'%' IDENTIFIED BY 'acore';"
-    sudo mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'acore'@'%';"
-    sudo mysql -u root -e "FLUSH PRIVILEGES;"
+    sudo mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS acore_auth;"
+    sudo mysql -u root -p -e "CREATE USER IF NOT EXISTS 'acore'@'%' IDENTIFIED BY 'acore';"
+    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'acore'@'%';"
+    sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
 
 
     ##########################################################################################
