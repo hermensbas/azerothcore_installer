@@ -12,3 +12,5 @@ sudo dpkg -i mysql-apt-config_0.8.32-1_all.deb
 sudo apt update
 sudo apt install mysql-server
 ````
+
+Make sure your select 8.4.2 in the configuration screen ;)
