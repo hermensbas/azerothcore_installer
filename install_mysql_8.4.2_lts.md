@@ -1,6 +1,6 @@
 # Install
 
-1. Backup DB or use export characters through the AC command options.
+1. Backup DB or use export characters through the AC (dump) command options.
 
 2. Go to https://dev.mysql.com/downloads/repo/apt/ for the latest apt package
 
