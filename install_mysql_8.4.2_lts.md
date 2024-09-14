@@ -1,6 +1,6 @@
 # Install or Update
 
-Haven't tested the update, personally i did an new install. So test when in doubt.
+Haven't tested the update, personally i did a new install. So test when in doubt.
 
 1. Backup DB or use export characters through the AC (dump) command options.
 
