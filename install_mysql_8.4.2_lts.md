@@ -1,4 +1,4 @@
-# Install
+# Install or Update
 
 1. Backup DB or use export characters through the AC (dump) command options.
 
