@@ -10,6 +10,6 @@ fi
 
 sed -e "s/{{ACCOUNT_NAME}}/$ACCOUNT_NAME/g" \
   "${ROOT_DIR}/sql/find_character.sql" > "/tmp/find_character.sql"
-sudo mysql -u root --database="acore_characters" < /tmp/find_character.sql
+sudo mysql -u root -p --database="acore_characters" < /tmp/find_character.sql
 
 echo "Find character executed..."
