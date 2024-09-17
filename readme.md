@@ -138,7 +138,10 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 .character level <name> <level>
 .teleport orgrimmar or .tel orgrimmar)
 .leave (when you want the group to leave you alone!)
-.addItem itemName (or ctrl+click the item) 
+.addItem itemName (or ctrl+click the item)
+.lookup item ThunderFury
+.lookup event moonfair
+.event start|stop id
 ```
 
 ## useful bot commands 
