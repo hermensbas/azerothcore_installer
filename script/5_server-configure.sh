@@ -30,6 +30,7 @@ then
     # Recompile default conf files
     ##########################################################################################
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure
+    mkdir -p /tmp/ac/logs
 
 
     ##########################################################################################
