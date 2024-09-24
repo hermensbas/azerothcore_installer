@@ -157,14 +157,12 @@ Code references
 # the following or when the bots are to strong you can lower the equipment.
 
 .playerbot bot init=white | common | uncommon | rare | epic | legendary
-
 .playerbot bot init=MaxItemLevel
+.playerbot rndbot init (re-randomize all bots again)
 
 autogear (whenever init is broken, max equipment levelItem configured in playerbot.conf)
-
 maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
 
 # After init or talents respec make sure you reset bot AI (see unbot).
-
 .playerbot bot add <name-of-character-on-account> (or account name instead of character name to add all characters on an account
 ```
