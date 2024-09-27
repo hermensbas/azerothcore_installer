@@ -159,6 +159,7 @@ Code references
 .playerbot bot init=white | common | uncommon | rare | epic | legendary
 .playerbot bot init=MaxItemLevel
 .playerbot rndbot init (re-randomize all bots again)
+     (rndbot stats/update/reset/init/refresh/add/remove)
 
 autogear (whenever init is broken, max equipment levelItem configured in playerbot.conf)
 maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
