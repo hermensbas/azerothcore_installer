@@ -115,6 +115,8 @@ Configure your server IP in 'data/enUS/realmlist.wtf' files
 - UnBot ([english version](https://github.com/noisiver/unbot-addon/tree/english)) 
 - [AI_VoiceOver](https://github.com/mrthinger/wow-voiceover/releases/download/v1.4.3/AI_VoiceOver-WoW_3.3.5-v1.4.3.zip)
 - [AI_VoiceOverData_Vanilla](https://github.com/mrthinger/wow-voiceover/releases/download/v1.3.1/AI_VoiceOverData_Vanilla-v1.0.0.zip)
+- https://gitlab.com/Tsoukie/compactraidframe-3.3.5
+- https://github.com/Macx-Lio/MultiBot (still under development)
 
 ## Router port-forward if public
 Use the above (ifconfig) IP for the following router poort-forwarding and/or firewall rules settings.
