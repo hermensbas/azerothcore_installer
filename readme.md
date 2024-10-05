@@ -2,9 +2,7 @@
 For development and play
 
 
-[https://www.youtube.com/watch?v=voW3Xs2f3pU](https://www.youtube.com/watch?v=iCn14KLCerY)
-
-[Introducation]([https://i.sstatic.net/Vp2cE.png](https://i3.ytimg.com/vi/iCn14KLCerY/maxresdefault.jpg))]([https://youtu.be/vt5fpE0bzSY](https://www.youtube.com/watch?v=iCn14KLCerY))
+[![Intro!](https://i3.ytimg.com/vi/iCn14KLCerY/maxresdefault.jpg)](https://www.youtube.com/watch?v=iCn14KLCerY)
 
 ## Server setup
  - vmware player
