@@ -10,7 +10,7 @@ then
     ##########################################################################################
     sudo apt update && \
         sudo apt full-upgrade -y && \
-            sudo apt-get install -y btop tmux sudo curl net-tools locate nano software-properties-common
+            sudo apt-get install -y btop ncdu tmux sudo curl net-tools locate nano software-properties-common
 
 
     ##########################################################################################
