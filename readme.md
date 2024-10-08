@@ -166,6 +166,9 @@ Code references
 autogear (whenever init is broken, max equipment levelItem configured in playerbot.conf)
 maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
 
+# equip urself
+.playerbot bot self, whisper yourself autogear and then use .playerbot bot self
+
 # After init or talents respec make sure you reset bot AI (see unbot).
 .playerbot bot add <name-of-character-on-account> (or account name instead of character name to add all characters on an account
 ```
