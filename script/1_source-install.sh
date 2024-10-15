@@ -10,13 +10,43 @@ then
     ##########################################################################################
     sudo apt update && \
         sudo apt full-upgrade -y && \
-            sudo apt-get install -y unzip git sudo git btop ncdu unzip git sudo git tmux sudo curl net-tools locate nano software-properties-common
+            sudo apt-get install -y \
+                unzip \
+                git \
+                sudo \
+                git \
+                btop \
+                ncdu \
+                unzip \
+                git \
+                sudo \
+                git \
+                tmux \
+                sudo \
+                curl \
+                net-tools \
+                locate \
+                nano \
+                software-properties-common
 
     ##########################################################################################
-    # Azerothcore dependencies
+    # Install core dependencies (https://www.azerothcore.org/wiki/linux-requirements)
     ##########################################################################################
     sudo apt-get update && \
-    	sudo apt-get install git cmake make gcc g++ clang libmysqlclient-dev libssl-dev libbz2-dev libreadline-dev libncurses-dev mysql-server libboost-all-dev
+    	sudo apt-get install \
+             git \
+             cmake \
+             make \
+             gcc \
+             g++ \
+             clang \
+             libmysqlclient-dev \
+             libssl-dev \
+             libbz2-dev \
+             libreadline-dev \
+             libncurses-dev \
+             mysql-server \
+             libboost-all-dev
 
 
     ##########################################################################################
