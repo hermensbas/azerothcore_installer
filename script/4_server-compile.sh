@@ -26,6 +26,7 @@ then
     # https://github.com/azerothcore/azerothcore-wotlk/blob/master/apps/compiler/compiler.sh
     # when module code changed there is no need for a full compile like below 'compile all'
     # in that case 'compile build' is enough and much much faster
+    # https://www.azerothcore.org/wiki/linux-core-installation
     ##########################################################################################
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler clean
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure
