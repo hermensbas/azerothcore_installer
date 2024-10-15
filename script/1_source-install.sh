@@ -32,8 +32,8 @@ then
     ##########################################################################################
     # Install core dependencies (https://www.azerothcore.org/wiki/linux-requirements)
     ##########################################################################################
-    sudo apt-get update && \
-    	sudo apt-get install \
+    sudo apt-get update -y && \
+    	sudo apt-get install -y \
              git \
              cmake \
              make \
