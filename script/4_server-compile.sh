@@ -8,17 +8,17 @@ then
     ##########################################################################################
     # General dependencies
     ##########################################################################################
-    sudo apt update && \
-        sudo apt full-upgrade -y && \
-            sudo apt-get install -y btop ncdu tmux sudo curl net-tools locate nano software-properties-common
+    #sudo apt update && \
+    #    sudo apt full-upgrade -y && \
+    #        sudo apt-get install -y btop ncdu tmux sudo curl net-tools locate nano software-properties-common
 
 
     ##########################################################################################
     # Install core dependencies (https://www.azerothcore.org/wiki/linux-requirements)
     ##########################################################################################
-    sudo ${ROOT_DIR}/_server/azerothcore/acore.sh install-deps && \
-        sudo apt-get update -y && \
-        sudo apt-get install -y git cmake make gcc g++ clang libmysqlclient-dev libssl-dev libbz2-dev libreadline-dev libncurses-dev mysql-server libboost-all-dev
+    #sudo ${ROOT_DIR}/_server/azerothcore/acore.sh install-deps && \
+    #    sudo apt-get update -y && \
+    #    sudo apt-get install -y git cmake make gcc g++ clang libmysqlclient-dev libssl-dev libbz2-dev libreadline-dev libncurses-dev mysql-server libboost-all-dev
 
 
     ##########################################################################################
