@@ -171,4 +171,7 @@ maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
 
 # After init or talents respec make sure you reset bot AI (see unbot).
 .playerbot bot add <name-of-character-on-account> (or account name instead of character name to add all characters on an account
+
+# while in BG
+.playerbots debug bg showpath=all 
 ```
