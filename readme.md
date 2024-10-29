@@ -144,6 +144,7 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 .lookup item ThunderFury
 .lookup event moonfair
 .event start|stop id
+.distance (amount of yards between you and selected target)
 ```
 
 ## useful bot commands 
