@@ -35,6 +35,7 @@ thread_cache_size = 12
 ```
 
 sudo systemctl restart mysql
+
 SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
 
 ## How to start
