@@ -6,10 +6,9 @@ For development and play
 
 ## Server setup
  - vmware player
- - ubuntu-24.04-live-server-amd64.iso
- - minimal setup
- - 70GB disksize (minimal 50GB)
- - 16 GB memorysize
+ - ubuntu-24.04-live-server-amd64.iso (minimal setup)
+ - 70GB disk
+ - 20 GB memory
  - 8 cores (amd 5700x)
  - network (bridged mode)
 
