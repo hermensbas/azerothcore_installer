@@ -13,6 +13,30 @@ For development and play
  - 8 cores (amd 5700x)
  - network (bridged mode)
 
+#### mysql 8.4.3
+
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+key_buffer_size         = 0
+# max_allowed_packet    = 64M
+# thread_stack          = 256K
+
+# INNODB stuff
+innodb_buffer_pool_size = 8G
+innodb_redo_log_capacity = 4G
+innodb_io_capacity = 500
+innodb_io_capacity_max = 2500
+innodb_use_fdatasync = ON
+innodb_buffer_pool_instances = 16
+innodb_log_buffer_size = 32M
+
+join_buffer_size = 1M
+thread_cache_size = 12
+```
+
+sudo systemctl restart mysql
+SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
+
 ## How to start
 ### Step 1
 ```bash
