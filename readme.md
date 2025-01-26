@@ -82,7 +82,7 @@ start
 
 Create accounts
 ```bash
-> acccount create ahbot mypass 
+> account create ahbot mypass 
 > acccount create admin mypass
 > account set gmlevel admin 3 -1 
 ```
