@@ -191,6 +191,10 @@ Code references
 autogear (whenever init is broken, max equipment levelItem configured in playerbot.conf)
 maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
 
+# let alt bots attack other bot on sight in pvp zone
+nc +pvp
+nc -pvp
+
 # equip urself
 .playerbot bot self, whisper yourself autogear and then use .playerbot bot self
 
