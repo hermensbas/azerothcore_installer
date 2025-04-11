@@ -204,3 +204,12 @@ nc -pvp
 # while in BG
 .playerbots debug bg showpath=all 
 ```
+
+Tank attack @dps attack in 10 seconds
+```
+@tank attack
+/in 10 @dps attack
+
+or use
+you could also use co +passive to get the dps to not attack until you use co -passive
+```
