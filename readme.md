@@ -173,10 +173,10 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 
 ## useful bot commands 
 Code references
-- See mod-playerbot/src/strategy/actions/ChatActionContext.h | cpp
-- See mod-playerbot/src/strategy/action/ActionContext.h | cpp
-- See mod-playerbot/src/ChatFilter.ccp
-- See mod-playerbot/src/PlayerbotMgr.cpp (around line 700 or search 'init='
+- See [mod-playerbot/src/strategy/actions/ChatActionContext.h](https://github.com/hermensbas/mod-playerbots/blob/master/src/strategy/actions/ChatActionContext.h) | cpp
+- See [mod-playerbot/src/strategy/action/ActionContext.h](https://github.com/hermensbas/mod-playerbots/blob/master/src/strategy/actions/ActionContext.h) | cpp
+- See [mod-playerbot/src/ChatFilter.cp](https://github.com/hermensbas/mod-playerbots/blob/master/src/ChatFilter.cpp)
+- See [mod-playerbot/src/PlayerbotMgr.cpp](https://github.com/hermensbas/mod-playerbots/blob/master/src/PlayerbotMgr.cpp#L692)
 - See unbot add-on tooltips
 
 ```bash
