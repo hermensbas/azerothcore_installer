@@ -5,11 +5,11 @@ For development and play
 [![Intro!](https://i3.ytimg.com/vi/iCn14KLCerY/maxresdefault.jpg)](https://www.youtube.com/watch?v=iCn14KLCerY)
 
 ## Server setup
- - vmware player
+ - VMWARE player
  - ubuntu-24.04-live-server-amd64.iso (minimal setup)
- - 70GB disk
- - 20 GB memory
- - 8 cores (amd 5700x)
+ - 100GB disk
+ - 64 GB memory
+ - 16 cores (AMD 7945HX)
  - network (bridged mode)
 
 #### mysql 8.4.3
