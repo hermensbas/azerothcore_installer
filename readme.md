@@ -13,29 +13,50 @@ For development and play
  - network (bridged mode)
 
 #### mysql 8.4.3
-
-sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
 ```
-key_buffer_size         = 0
-# max_allowed_packet    = 64M
-# thread_stack          = 256K
-
-# INNODB stuff
-innodb_buffer_pool_size = 8G
-innodb_redo_log_capacity = 4G
-innodb_io_capacity = 500
-innodb_io_capacity_max = 2500
-innodb_use_fdatasync = ON
-innodb_buffer_pool_instances = 16
-innodb_log_buffer_size = 32M
-
-join_buffer_size = 1M
-thread_cache_size = 12
-```
-
+mysql --help | grep my.cnf
+sudo nano /etc/mysql/my.cnf
 sudo systemctl restart mysql
-
 SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
+```
+
+/etc/mysql/my.cnf
+```
+# InnoDB Memory
+innodb_buffer_pool_size = 32G
+innodb_buffer_pool_instances = 8
+innodb_log_buffer_size = 256M
+innodb_redo_log_capacity = 8G
+
+# InnoDB I/O
+innodb_io_capacity = 1000
+innodb_io_capacity_max = 4000
+innodb_flush_method = O_DIRECT
+innodb_use_fdatasync = ON
+innodb_flush_log_at_trx_commit = 2
+
+# Temp Tables
+tmp_table_size = 128M
+max_heap_table_size = 128M
+
+# Thread/Connection Handling
+thread_cache_size = 32
+join_buffer_size = 1M
+sort_buffer_size = 2M
+max_connections = 300
+table_open_cache = 4000
+open_files_limit = 65535
+
+# Deadlock/Lock Management
+innodb_lock_wait_timeout = 10
+innodb_deadlock_detect = ON
+
+# Logging (for profiling performance)
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/mysql-slow.log
+long_query_time = 1
+log_queries_not_using_indexes = 1
+```
 
 ## How to start
 ### Step 1
