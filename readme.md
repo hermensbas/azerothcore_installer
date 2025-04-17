@@ -22,36 +22,42 @@ SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
 
 /etc/mysql/my.cnf
 ```
-# InnoDB Memory
-innodb_buffer_pool_size = 32G
+# ------------------ Memory Usage ------------------
+innodb_buffer_pool_size = 24G          
 innodb_buffer_pool_instances = 8
-innodb_log_buffer_size = 256M
-innodb_redo_log_capacity = 8G
+innodb_log_buffer_size = 512M
+innodb_redo_log_capacity = 6G
 
-# InnoDB I/O
-innodb_io_capacity = 1000
-innodb_io_capacity_max = 4000
-innodb_flush_method = O_DIRECT
+# ------------------ I/O & NVMe Tuning ------------------
+innodb_flush_method = O_DIRECT              # Avoid OS cache — best for NVMe
 innodb_use_fdatasync = ON
-innodb_flush_log_at_trx_commit = 2
+innodb_flush_log_at_trx_commit = 2          # Fast + safe enough with battery/UPS
+innodb_io_capacity = 2000                   # Pushes high IOPS for writes
+innodb_io_capacity_max = 8000               # Maximize during bursts
 
-# Temp Tables
-tmp_table_size = 128M
-max_heap_table_size = 128M
+# ------------------ Temp Tables & Buffers ------------------
+tmp_table_size = 256M
+max_heap_table_size = 256M
+join_buffer_size = 2M
+sort_buffer_size = 4M
+read_buffer_size = 2M
+read_rnd_buffer_size = 1M
 
-# Thread/Connection Handling
-thread_cache_size = 32
-join_buffer_size = 1M
-sort_buffer_size = 2M
+# ------------------ Concurrency / Threads ------------------
+thread_handling = one-thread-per-connection
+thread_cache_size = 64
 max_connections = 300
 table_open_cache = 4000
 open_files_limit = 65535
 
-# Deadlock/Lock Management
+# ------------------ Locking/Deadlocks ------------------
 innodb_lock_wait_timeout = 10
 innodb_deadlock_detect = ON
 
-# Logging (for profiling performance)
+# ------------------ File & Table Management ------------------
+innodb_file_per_table = 1
+
+# ------------------ Logging / Debug ------------------
 slow_query_log = 1
 slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 1
