@@ -18,10 +18,13 @@ mysql --help | grep my.cnf
 sudo nano /etc/mysql/my.cnf
 sudo systemctl restart mysql
 SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
+# error while restart?
+sudo journalctl -xeu mysql.service --no-pager | tail -n 30
 ```
 
 /etc/mysql/my.cnf
 ```
+[mysqld]
 # ------------------ Memory Usage ------------------
 innodb_buffer_pool_size = 24G          
 innodb_buffer_pool_instances = 8
