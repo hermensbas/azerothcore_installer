@@ -9,10 +9,10 @@ For development and play
  - ubuntu-24.04-live-server-amd64.iso (minimal setup)
  - 100GB disk
  - 64 GB memory
- - 16 cores (AMD 7945HX)
+ - assigned 16 threads (8 cores, 2 cores per thread) running on AMD 7945HX
  - network (bridged mode)
 
-#### mysql 8.4.3
+#### mysql 8.4.x (LTS)
 ```
 mysql --help | grep my.cnf
 sudo nano /etc/mysql/my.cnf
@@ -22,25 +22,27 @@ SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
 sudo journalctl -xeu mysql.service --no-pager | tail -n 30
 ```
 
-/etc/mysql/my.cnf
+/etc/mysql/mysql.conf.d/mysqld.cnf
 ```
 [mysqld]
 # ------------------ Memory Usage ------------------
 innodb_buffer_pool_size = 24G          
 innodb_buffer_pool_instances = 8
 innodb_log_buffer_size = 512M
-innodb_redo_log_capacity = 6G
+innodb_redo_log_capacity = 2G
 
 # ------------------ I/O & NVMe Tuning ------------------
 innodb_flush_method = O_DIRECT              # Avoid OS cache — best for NVMe
 innodb_use_fdatasync = ON
-innodb_flush_log_at_trx_commit = 2          # Fast + safe enough with battery/UPS
-innodb_io_capacity = 2000                   # Pushes high IOPS for writes
-innodb_io_capacity_max = 8000               # Maximize during bursts
+innodb_io_capacity = 8000                   # Pushes high IOPS for writes
+innodb_io_capacity_max = 16000              # Maximize during bursts
 
 # ------------------ Temp Tables & Buffers ------------------
 tmp_table_size = 256M
 max_heap_table_size = 256M
+table_open_cache = 4096
+open_files_limit = 65535
+thread_cache_size = 200
 join_buffer_size = 2M
 sort_buffer_size = 4M
 read_buffer_size = 2M
