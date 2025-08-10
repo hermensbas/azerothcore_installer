@@ -10,7 +10,7 @@ fi
 
 sed -e "s/{{REALM_IP}}/$REALM_IP/g" \
     "${ROOT_DIR}/sql/update_realm_ip.sql" > "/tmp/update_realm_ip.sql"
-sudo mysql -u root --database="acore_characters" < /tmp/update_realm_ip.sql
+sudo mysql -u root -p --database="acore_characters" < /tmp/update_realm_ip.sql
 
 echo " "
 echo "###########################################################################################"
