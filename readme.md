@@ -115,7 +115,7 @@ start
 Create accounts
 ```bash
 > account create ahbot mypass 
-> acccount create admin mypass
+> account create admin mypass
 > account set gmlevel admin 3 -1 
 ```
 
