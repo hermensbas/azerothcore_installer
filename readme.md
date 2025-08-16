@@ -67,6 +67,7 @@ slow_query_log = 1
 slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 1
 log_queries_not_using_indexes = 1
+binlog_expire_logs_seconds = 604800   # 7 days
 ```
 
 ## How to start
