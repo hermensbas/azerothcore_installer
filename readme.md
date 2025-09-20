@@ -100,10 +100,10 @@ AiPlayerbot.Enabled = 0
 disable ahbot
 ```bash
 nano config/modules/mod_ahbot.config
-AuctionHouseBot.Account = 0
+#AuctionHouseBot.Account = 0
 AuctionHouseBot.GUID = 0
 AuctionHouseBot.EnableSeller = 0
-AuctionHouseBot.EnableBuyer = 0
+#AuctionHouseBot.EnableBuyer = 0
 ```
 
 ### Step 3
@@ -134,10 +134,10 @@ Find character executed...
 Configure and enable ahbot
 ```bash
 nano config/modules/mod_ahbot.config
-AuctionHouseBot.Account = 1
+#AuctionHouseBot.Account = 1
 AuctionHouseBot.GUID = 1
 AuctionHouseBot.EnableSeller = 1
-AuctionHouseBot.EnableBuyer = 1
+#AuctionHouseBot.EnableBuyer = 1
 ```
 
 Enable playerbots
