@@ -89,7 +89,7 @@ then
     ##########################################################################################
     sudo rm -rf ${ROOT_DIR}/_download/modules/mod-player-bot-level-brackets > /dev/null 2>&1
     git config --global --add safe.directory "${ROOT_DIR}/_download/modules/mod-player-bot-level-brackets"
-    git clone ${AC_MODE_AHBOT_REPO} --branch=${AC_MODE_AHBOT_REPO_BRANCH} ${ROOT_DIR}/_download/modules/mod-player-bot-level-brackets
+    git clone ${AC_MODE_BRACKETS_REPO} --branch=${AC_MODE_BRACKETS_REPO_BRANCH} ${ROOT_DIR}/_download/modules/mod-player-bot-level-brackets
 
 
     ##########################################################################################
