@@ -62,6 +62,9 @@ then
                 ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/mod_ahbot.conf.dist > \
                     ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/mod_ahbot.conf | exit 1
 
+    sudo cat ${ROOT_DIR}/config/modules/mod_player_bot_level_brackets.conf \
+                ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/mod_player_bot_level_brackets.conf.dist > \
+                    ${ROOT_DIR}/_server/azerothcore/env/dist/etc/modules/mod_player_bot_level_brackets.conf | exit 1
 
     ##########################################################################################
     # Apply server realm configuration
