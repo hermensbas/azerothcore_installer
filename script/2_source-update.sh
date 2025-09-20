@@ -28,6 +28,12 @@ then
     git -C ${ROOT_DIR}/_download/modules/mod-ah-bot clean -fd
     git -C ${ROOT_DIR}/_download/modules/mod-ah-bot reset --hard origin/${AC_MODE_AHBOT_REPO_BRANCH}
 
+    ##########################################################################################
+    # resetmod-player-bot-level-brackets to latest branch
+    ##########################################################################################
+    git -C ${ROOT_DIR}/_download/modules/mod-player-bot-level-brackets fetch origin
+    git -C ${ROOT_DIR}/_download/modules/mod-player-bot-level-brackets clean -fd
+    git -C ${ROOT_DIR}/_download/modules/mod-player-bot-level-brackets reset --hard origin/${AC_MODE_BRACKETS_REPO_BRANCH}
 
     echo "Executed..."
 
