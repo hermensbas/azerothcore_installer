@@ -77,8 +77,8 @@ then
     ##########################################################################################
     # Apply ah-bot custom configuration
     ##########################################################################################
-    source ${ROOT_DIR}/script/update_ahbot_config.sh ${AH_BOT_MIN_ITEMS} ${AH_BOT_MAX_ITEMS}
-    echo " "
+    #source ${ROOT_DIR}/script/update_ahbot_config.sh ${AH_BOT_MIN_ITEMS} ${AH_BOT_MAX_ITEMS}
+    #echo " "
     
     
     ##########################################################################################
