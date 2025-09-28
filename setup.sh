@@ -58,6 +58,9 @@ echo "export AC_MODE_PLAYER_BOTS_REPO_BRANCH=${AC_MODE_PLAYER_BOTS_REPO_BRANCH}"
 echo "export AC_MODE_AHBOT_REPO=${AC_MODE_AHBOT_REPO}" >> ~/.bash_wow
 echo "export AC_MODE_AHBOT_REPO_BRANCH=${AC_MODE_AHBOT_REPO_BRANCH}" >> ~/.bash_wow
 
+echo "export AC_MODE_BRACKETS_REPO=${AC_MODE_BRACKETS_REPO}" >> ~/.bash_wow
+echo "export AC_MODE_BRACKETS_REPO_BRANCH=${AC_MODE_BRACKETS_REPO_BRANCH}" >> ~/.bash_wow
+
 echo "export DATAPATH=${DATAPATH}" >> ~/.bash_wow
 
 echo "export AUTHSERVER_SESSION=${AUTHSERVER_SESSION}" >> ~/.bash_wow
