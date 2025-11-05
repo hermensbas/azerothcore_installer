@@ -203,6 +203,8 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 .event start|stop id
 .distance (amount of yards between you and selected target)
 .gps
+.go xyz
+/whisper bot nc +debug
 ```
 
 ## useful bot commands 
