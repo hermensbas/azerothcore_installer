@@ -98,7 +98,7 @@ then
     if ! [ -f ${ROOT_DIR}/_data/data.zip ]; 
     then
     mkdir -p ${ROOT_DIR}/_data > /dev/null 2>&1
-    sudo curl -L https://github.com/wowgaming/client-data/releases/download/v18/data.zip --output ${ROOT_DIR}/_data/data.zip
+    sudo curl -L https://github.com/wowgaming/client-data/releases/download/v18.0/Data.zip --output ${ROOT_DIR}/_data/data.zip
     fi
 
 
