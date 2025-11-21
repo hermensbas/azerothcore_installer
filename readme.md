@@ -232,7 +232,7 @@ nc +pvp
 nc -pvp
 
 # equip urself
-.playerbot bot self, whisper yourself autogear and then use .playerbot bot self
+'.playerbot bot self', whisper yourself 'maintenance', whisper yourself 'autogear', whisper yourself 'nc +new rpg,+grind'
 
 # After init or talents respec make sure you reset bot AI (see unbot).
 .playerbot bot add <name-of-character-on-account> (or account name instead of character name to add all characters on an account
