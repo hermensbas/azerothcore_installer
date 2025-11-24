@@ -98,7 +98,7 @@ then
     if ! [ -f ${ROOT_DIR}/_data/data.zip ]; 
     then
     mkdir -p ${ROOT_DIR}/_data > /dev/null 2>&1
-    sudo curl -L ${CLIENT_DATA} --output ${ROOT_DIR}/_data/data.zip
+    sudo curl -L ${AC_CLIENT_DATA} --output ${ROOT_DIR}/_data/data.zip
     fi
 
     ##########################################################################################
