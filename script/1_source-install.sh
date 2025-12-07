@@ -1,5 +1,10 @@
 #!/bin/bash
 
+##########################################################################################
+# USER CONFIG
+##########################################################################################
+set -a; source settings.env; set +a
+
 read -p "This will install the source code. Are you sure? (Y)es/(N)o: " -n 1 -r
 echo " ";
 if [[ $REPLY =~ ^[Yy]$ ]];
