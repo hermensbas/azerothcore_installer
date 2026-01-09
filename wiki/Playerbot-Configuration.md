@@ -1,5 +1,36 @@
+## MySQL Tuning
+The default MySQL configuration is not adequate for use with Playerbots, and will lead to increased disk activity and decreased performance.
+
+You should add/change the below config options, in your MySQL configuration where ```innodb_buffer_pool_size``` ideally should be 50% of your total RAM:
+
+```
+#
+# * Fine Tuning
+# Example with 64 GB RAM
+
+# INNODB
+innodb_buffer_pool_size = 32G
+innodb_io_capacity = 500
+innodb_io_capacity_max = 2500
+innodb_use_fdatasync = ON
+innodb_buffer_pool_instances = 12
+innodb_log_buffer_size = 32M
+
+# Max age of binary logs - 5 days to prevent binary log pileups
+binlog_expire_logs_seconds = 432000
+
+# Optionally:
+# Prevent SQL Deadlocks as much as possible
+transaction_isolation="READ-COMMITTED"
+```
+
+Recommended configuration to extend lifespan of your hard drive:
+- in mysql configuration file change/add line `skip-log-bin` which reduce ~75-90% of writes because skipping binary logging (Use at own risk)
+- in playerbots configuration file enable `AiPlayerbot.DisabledWithoutRealPlayer` to make sure no bots are logged in, while no players are
+- use as few bots as possible or limit yourself to only using altbots to minimize the amount of writes
+
 ## Bot activity profiles and performance
-Before going into the configuration options we need explain the logic abit. Every update tick of the server its calculated whether a bot can
+Before going into the configuration options we need explain the logic a bit. Every update tick of the server its calculated whether a bot can
 or can't be active. An active bots takes and eats alot more resources then an idle bot.
 
 The following logic is applied to determine whether a bot is active or not, applied in the explained order.
@@ -146,10 +177,8 @@ AiPlayerbot.RandomBotFixedLevel = 0
 AiPlayerbot.DisableRandomLevels = 0
 AiPlayerbot.RandombotStartingLevel = 5
 AiPlayerbot.SyncLevelWithPlayers = 0
-AiPlayerbot.DisableDeathKnightLogin = 1
 AiPlayerbot.SyncQuestWithPlayer = 1
 AiPlayerbot.AutoDoQuests = 1
-
 
 #-------------------------------------------------------------------
 # command (gear: 1 = normal, 2 = uncommon, 3 = rare, 4 = epic, 5 = legendary)

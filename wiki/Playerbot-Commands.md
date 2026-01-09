@@ -8,8 +8,8 @@ command | action
 ``.playerbots bot add [name1,name2,name3]`` | login altbots. Note that you are also able to login altbots from other accounts depending on your configurations.
 ``.playerbots bot addaccount [accountname]`` | login an entire account of altbots. Depending on your configurations you can login other accounts.
 ``.playerbots bot remove name1,name2,name3`` | logout altbots
-``.playerbots bot add *`` |  login all altbots
-``.playerbots bot remove *`` | logout all altbots
+``.playerbots bot add *`` |  login all altbots that are in your party/raid
+``.playerbots bot remove *`` | logout all altbots that are in your party/raid
 ``maintenance`` | enable altbot to learn all available spells and skills, supplement consumables, enchant gear, and repair. Can also be used on rndbots, but they automatically do this. Whisper for an individual bot or use /p or /r to simultaneously target multiple bots.
 ``autogear`` | automatically gear your altbot, with quality based on your .conf settings AutoGearQualityLimit and AutoGearScoreLimit. Can also be used on rndbots, but they automatically do their own gear initilization upon level up.
 ``talents`` | check current spec of bot
@@ -40,7 +40,7 @@ command | action
 ``follow`` | run toward player (/w for individual or /p or /r for party/raid)
 ``flee`` | run toward player ignoring everything else (/w for individual or /p or /r for party/raid)
 ``stay`` | stay in place
-``runaway`` | kite mob
+``runaway`` | kite mob // note: currently non-functional
 ``grind`` | attack anything
 ``disperse set x`` | force bots to maintain a distance of x yards from each other
 ``disperse disable`` | resets disperse distance to default value
@@ -49,10 +49,9 @@ command | action
 Furthermore, you can specify by group or type for some commands like "attack" and "follow", such as:
 - "@group1 follow"
 - "@group2 attack"
-- "@tank follow"
-- "@ranged attack"
-- "@rangeddps attack"
-- "@meleedps attack"
+
+This following are other groups that can be targeted: 
+-  @tank, @dps, @heal, @ranged, @rangeddps, @meleedps, @[className]
 
 You can also command multiple groups at a time like below:
 - "@Group1,4"
@@ -65,23 +64,31 @@ command | action
 ``spells`` | show bot's spells
 ``cast [spell_name]`` | /w a bot to cast a spell
 ``cast [spell_name] on [PlayerName]`` | /w a bot to cast a spell on a specified Player
-``ss +[spell id]`` | add spell to ignored spells list
-``ss -[spell id]`` | remove spell from ignored spells list
+``ss +[spell id]`` | add spell to exclude spells list
+``ss -[spell id]`` | remove spell from exclude spells list
+``ss reset`` | removes all spells from exclude spells list
 ``trainer`` | show what bot can learn from the selected trainer
 ``trainer learn`` | learn from the selected trainer
 
 ## Party/Raid Target Selection
+RTSC is a system that enables players to save locations for specified bots to go to using the "aedm" spell that is given when the "rtsc" command is used. Aedm is a spell you use to point and click a particular location that can be saved and used via some of the commands below.
+
+RTI is a system that enables players to focus bots on specified targets using standard WoW icons.
 
 command | action
 :---|:---
+``rtsc`` | toggles on rtsc and gives players the "aedm" spell which will appear in the general category of their spellbook 
+``rtsc cancel`` | toggles off rtsc and removes the "aedm" spell from the spellbook
+``rtsc save [#]`` | while rtsc is enabled, this command will save a location as the specified number when the player uses the aedm spell and clicks on a location
+``rtsc unsave [#]`` | clears the saved location
+``rtsc go [#]`` | command bots to go to the saved location, this command can be whispered to individual bots or filtered in party/raid chat with the same chat filters listed in Party/Raid General Commands (e.g., "@Tank rtsc go 5" will send all tanks to saved location 5)
+``[name/group] rtsc toggle`` | toggles the ability to point and click with mouse button to save a location for specified bots to move to, can specify by group or class (ie "@druid rtsc toggle" or "@group1 rtsc toggle")
+``rtsc go save`` | command bots to move back into saved rtsc position
 ``rti <icon>`` | sets the target icon for the bot to prioritize (icons: skull, cross, circle, star, square, triangle, diamond, and moon)
 ``attack rti target`` | commands bots to attack their rti target
-``<name/group> rtsc toggle`` | toggles the ability to point and click with mouse button to save a location for specified bots to move to, can specify by group or class (ie "@druid rtsc toggle" or "@group1 rtsc toggle")
-``rtsc go save`` | command bots to move back into saved rtsc position
-``rtsc cancel`` | cancel rtsc toggle
 ``rti cc <icon>`` | sets a specific icon as the cc target (the default is moon) 
 
-Video demonstration:
+Video guide:
 https://www.youtube.com/watch?v=Pwt7schIC08
 
 ## Strategies
@@ -102,13 +109,13 @@ nc ?
 
 ### Combat Strategies
 
+General
 strategy | description
 :---|:---|
 ``tank`` | use threat-generating abilities (warrior, paladin, druid will use ``bear``)
 ``tank assist`` | make tank pull mobs off of others
 ``dps`` |  use dps abilities (rogue, hunter, shaman, priest, druid will use ``cat``)
 ``cc`` |  use cc abilities (requires cc rti target, default is moon icon; it is useful to know that bots will not attack rti target and will not try to use cc if target is not stunnable)
-``caster`` | wasn't in docs but is in game
 ``assist`` | target one mob at a time
 ``aoe`` | target many mobs at a time
 ``boost`` | bots will use big cds (useful to use -boost and +boost on macros to control when to burst on bosses)
@@ -121,25 +128,57 @@ strategy | description
 ``healer dps`` | healers cast damage spells if they have enough mana
 ``tank face`` | ensure the current target does not face ranged players in the group (to counter breath and cleave-like spells)
 ``behind`` | move to the target's back (rear flank) when they are not positioned behind the target
-``frost``, ``fire`` | mage only
-``bear``, ``cat``, ``caster`` | druid only
-``bdps`` | buff dps (paladin will use seal of might)
-``bspeed`` | buff movement speed (hunter only)
-``bhealth``, ``bmana`` | buff health or mana (paladin will use seal of light vs seal of wisdom)
-``rfire``, ``rfrost``, ``rshadow``, ``rnature`` | resistance strategies (paladin auras and hunter aspects)
-``meta melee`` | default strategy for demonology warlocks, makes warlock go melee while using metamorphosis and immolation aura (demonology warlock only)
+
+Druid
+strategy | description
+:---|:---
+``bear``, ``cat``, ``caster`` | dictates overall strategy for druids, note that these are already handled by their talent selection
+
+Hunter
+strategy | description
+:---|:---
 ``trap weave`` | enables the trap weave strat for hunters, dropping an explosive trap as part of their rotation (hunter only)
+
+Mage
+strategy | description
+:---|:---
+``frost``, ``fire`` | mage only, note that these are already handled by their talent selection
 ``firestarter`` | enables the firestarter strat for fire mages, resulting in the mage going into melee to utilize the instant cast flamestrike from the firestarter talent (fire mage only)
 
+Shaman
+strategy | description
+:---|:---
+``[totem name]`` | shaman will add totem into their call of the elements cast (ie "co +tremor" will add that totem for the shaman)
+
+Warlock
+strategy | description
+:---|:---
+``meta melee`` | default strategy for demonology warlocks, makes warlock go melee while using metamorphosis and immolation aura (demonology warlock only)
 
 ### Non-Combat Strategies
 
-General (WIP)
+General
 strategy | description
 :---|:---
 ``food`` | initiate or stop eating/drinking
 ``pvp`` |  turn on or off pvp mode
-``loot`` |  enable looting everything by bots. For add or remove that strategy for randombots is required GM level > 1
+``loot`` |  enable looting everything by bots. Note: adding or removing that strategy for randombots requires GM level
+
+Priest
+strategy | description
+:---|:---
+``rshadow`` | priest will cast shadow protection
+
+Paladin
+strategy | description
+:---|:---
+``bdps``, ``bmana``, ``bstats``, ``bhealth`` | paladin blessing strategies (might, wisdom, kings, and kings/sanctuary depending on context, respectively)
+``rfire``, ``rfrost``, ``rshadow``, ``baoe``, ``barmor``, ``bcast``, ``bspeed`` | paladin aura strategies (fire, frost, shadow, retribution, devotion, concentration, and crusader aura respectively)
+
+Hunter
+strategy | description
+:---|:---
+``bdps``, ``bspeed``, ``bmana``, ``rnature`` | hunter aspect strategies (dragonhawk/hawk, pack/cheetah, viper, and wild respectively)
 
 Warlock Pet Strategies (Note that defaults are as follows: Affliction uses felhunter, Demonology uses felguard, and Destruction uses imp)
 strategy | description
@@ -174,14 +213,6 @@ wotlk-eoe | enable Eye of Eternity strats
 uld | enable Ulduar strats (Note: Strats implemented up to Hodir and Freya, WIP on future bosses)
 onyxia | enable Onyxia's Lair strats
 icc | enable Icecrown Citadel strats (Note: all normal mode currently doable, HC is WIP)
-
-
-### Defaults
-
-- Tank classes default w/ ``tank aoe``
-- Non-tank classes default w/ ``attack weak``
-- Strategies that are incompatible, such as ``stay`` and ``follow``, are ignored
-
 
 ## Loot
 
@@ -235,14 +266,26 @@ command | action
 ``talk`` | talk to the selected npc (to complete a quest)
 ``u [game object]`` | use game object (use "los" command to obtain the game object link)
 
-## Hunter Pet Commands
-
+## General Pet Commands
 command | action
 :---|:---
-``pet name "name"`` | summon a tameable pet by name
-``pet id "id"`` | summon a tameable pet by database creature ID
-``pet family "family"`` | randomly summon a tameable pet of the given family
-``pet rename "new name"`` | rename the current pet and refresh its name in the client UI
+``pet aggressive`` | changing pet stance on aggresive
+``pet passive`` | changing pet stance on passive
+``pet defensive`` | changing pet stance on defensive
+``pet stance`` | display current pet stance
+``pet attack`` | pet attack selected target
+``pet follow`` | pet follow his master
+``pet stay`` | pet stay in place
+
+## Hunter Tame Commands
+command | action
+:---|:---
+``tame`` | tame help
+``tame name "name"`` | summon a tameable pet by name
+``tame id "id"`` | summon a tameable pet by database creature ID
+``tame family`` | tame family help
+``tame family "family"`` | randomly summon a tameable pet of the given family
+``tame rename "new name"`` | rename the current pet and refresh its name in the client UI
 
 ## Account linking for Altbot control
 
@@ -255,6 +298,12 @@ command | action
 ``.playerbots account linkedAccounts`` | Shows a list of accounts, which are currently linked with this account
 ``.playerbots account unlink ACCOUNTNAME`` | Remove a linked account (this will remove the link for both sides, ensuring that access to the characters can be canceled from both sides anytime)
 
+## Professions
+
+strategy | description
+:---|:---
+``master fishing`` | The strategy is automatically added when ``EnableFishingWithMaster`` is enabled in the config. Strategy can be added manually. Strategy is automatically removed if further than ``EndFishingWithMaster`` from water. Strategy also overrides the follow distance to `FishingDistanceFromMaster`.
+
 ## Miscellaneous Commands
 
 command | action
@@ -265,7 +314,7 @@ command | action
 ``playerbot bot initself`` | CAREFUL WITH THIS - re-rolls YOUR character
 ``playerbot bot list`` | lists your altbots (and your other characters you can add as bots if you have that enabled, but I'd be very careful if you do that as you can then re-roll your other characters using the init command)
 ``playerbot bot tweak`` | sets the tweakvalue (seems to be related to a config value that's no longer present and the variable it changes doesn't seem to actually do anything anymore)
-``playerbot bot self`` | make yourself into a bot, you have to logout to turn this off, dont run it twice without doing so (it wont toggle it back off like its supposed to, it actually seems to apply multiple AI's onto yourself all fighting to do different things, sounds fun until it crashes the server)
+``playerbot bot self`` | make yourself into a bot, use it again to disable
 ``playerbot bot lookup`` | doesn't do anything but print out a useless usage message (which says you're supposed to give it a class parameter but doing so doesn't change anything because the function called is literally *just* the usage message there's no functionality there)
 ``.playerbots bot init=rare name1,name2,name3`` | respawn bot at your level with talents & rare gear (gearing currently bugged, recommend autogear instead)
 ``who`` | show bot race, spec, talents, class, level, average item level, current zone 
@@ -278,36 +327,9 @@ You can override everything and instruct the bot to do something specific:
 command | description
 :---|:---|
 ``do attack`` | attack target
-``do loot`` | loot target
 ``do attack my target`` | attack my target
-``do add all loot`` | check every corpse and game object for loot
-
-## Example Macros
-
-To make bots flee with you from the danger:
-
-```
-/p reset
-/p nc -stay,+follow,+passive
-/p co +passive
-/p do follow
-```
-
-To make bots follow you and assist you in attack:
-
-```
-/p nc -stay,+follow,-passive
-/p co -passive
-/p do follow
-```
-
-To make bots stay in place and assist you in attack:
-
-```
-/p nc -follow,+stay,+passive
-/p co +passive
-/p do stay
-```
+``do loot`` | loot target // note: currently non-functional
+``do add all loot`` | check every corpse and game object for loot // note: currently non-functional
 
 ## Help
 

@@ -1,11 +1,8 @@
 ## Multibot (by Macx-Lio)
 Multifunctional tool designed to help control your playerbots. Actively maintained.
-* [MultiBot](https://github.com/Macx-Lio/MultiBot) 
+* [MultiBot](https://github.com/Macx-Lio/MultiBot)
 
-## Unbot (by Liyunfan)
-Original Playerbot addon used to control your playerbots, not actively maintained.
-* Chinese version: [Unbot Addon (zh)](https://github.com/liyunfan1223/unbot-addon).
-* English version (translated by @Revision): [Unbot Addon (en)](https://github.com/noisiver/unbot-addon/tree/english).
+Note: The official version of MultiBot is currently inactive, it's recommend to use the one maintained by Wishmaster117 found [here](https://github.com/Wishmaster117/MultiBot) for now
 
 ## Other Recommended Addons
 * https://gitlab.com/Tsoukie/compactraidframe-3.3.5
