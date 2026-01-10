@@ -82,16 +82,14 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
             -ex \"set logging on\" \
             -ex \"set pagination off\" \
             -ex \"set confirm off\" \
-            -ex \"set print thread-events on\" \
-            -ex \"set print object on\" \
             -ex \"catch signal SIGSEGV\" \
             -ex \"catch signal SIGABRT\" \
             -ex \"catch signal SIGFPE\" \
             -ex \"catch signal SIGILL\" \
             -ex \"run -c ../etc/worldserver.conf\" \
-            -ex \"thread apply all bt full\" \
+            -ex \"bt full\" \
+            -ex \"info locals\" \
             -ex \"info threads\" \
-            -ex \"thread apply all info locals\" \
             -ex \"quit\" \
             --args ./worldserver"
 else
