@@ -18,15 +18,12 @@ WORLDSERVER_SESSION="world-session"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 AUTH_LOG="$LOGS_PATH/authserver_$TIMESTAMP.log"
 WORLD_LOG="$LOGS_PATH/worldserver_$TIMESTAMP.log"
-WORLD_CRASH_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
+GDB_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
 
 ##########################################################################################
 # Determine SERVER_ROOT based on script location (works with aliases)
 ##########################################################################################
 SERVER_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-
-RUN_ENGINE="$SERVER_ROOT/_server/azerothcore/env/dist/run-engine"
-chmod +x "$RUN_ENGINE"
 
 ##########################################################################################
 # Check debug toggle
@@ -77,19 +74,16 @@ start_tmux_session() {
 AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
 
 # Worldserver command
-WORLD_CMD="$RUN_ENGINE restart worldserver \
-    --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
-    --server-config ${SERVER_ROOT}/conf/worldserver.conf \
-    --session-manager tmux \
-    --logs-path $LOGS_PATH \
-    --crashes-path $CRASHES_PATH"
-
-# Add GDB if debug mode
 if [[ $DEBUG_MODE -eq 1 ]]; then
     echo "DEBUG MODE: Running worldserver under GDB"
-    WORLD_CMD="$WORLD_CMD --gdb-enabled 1"
-    # Optional: log GDB crashes separately
-    WORLD_CMD="$WORLD_CMD --gdb-log $WORLD_CRASH_LOG"
+    WORLD_CMD="gdb -ex 'set logging file $GDB_LOG' \
+                  -ex 'set logging enabled on' \
+                  -ex 'run' \
+                  -ex 'bt full' \
+                  -ex 'quit' \
+                  --args $SERVER_ROOT/env/dist/bin/worldserver"
+else
+    WORLD_CMD="$SERVER_ROOT/acore.sh run-worldserver"
 fi
 
 ##########################################################################################
