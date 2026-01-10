@@ -1,10 +1,7 @@
 #!/bin/bash
 
-#./script.sh          # normal mode
-#./script.sh debug    # debug mode (GDB, timestamped crash logs)
-
 ##########################################################################################
-# Toggle debug mode
+# Toggle debug mode: ./script.sh debug
 ##########################################################################################
 DEBUG_MODE=0
 if [[ "$1" == "debug" ]]; then
@@ -21,17 +18,23 @@ export CRASHES_PATH="/tmp/ac/crashes"
 mkdir -p "$LOGS_PATH" "$CRASHES_PATH"
 
 ##########################################################################################
-# Helper: start tmux session and run command
+# Sessions
 ##########################################################################################
+AUTHSERVER_SESSION="authserver"
+WORLDSERVER_SESSION="worldserver"
+
+# Path to binaries
+AUTH_EXE="${SERVER_ROOT}/env/dist/bin/authserver"
+WORLD_EXE="${SERVER_ROOT}/env/dist/bin/worldserver"
+
+# Helper to start a tmux session
 start_tmux_session() {
     local session_name=$1
     local command=$2
     local log_file=$3
-    local debug=$4
 
-    # Create session if it doesn't exist
     if tmux has-session -t "$session_name" 2>/dev/null; then
-        echo "Tmux session '$session_name' already exists, attaching command..."
+        echo "Tmux session '$session_name' already exists."
     else
         if tmux new-session -d -s "$session_name"; then
             echo "Created tmux session: $session_name"
@@ -41,30 +44,37 @@ start_tmux_session() {
         fi
     fi
 
-    # Export environment variables inside tmux
+    # Run the command inside tmux
     tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
+    tmux send-keys -t "$session_name" "$command | tee -a $log_file" C-m
 
-    if [[ "$debug" -eq 1 ]]; then
-        # Timestamped GDB log
-        local gdb_log="$CRASHES_PATH/${session_name}_gdb_$(date +%Y%m%d_%H%M%S).log"
-        tmux send-keys -t "$session_name" "gdb -ex 'set logging file $gdb_log' -ex 'set logging enabled on' -ex 'run' -ex 'bt full' -ex 'quit' --args $command" C-m
-        echo "Debug mode enabled for $session_name, logging to $gdb_log"
-    else
-        # Normal mode: append output to log
-        tmux send-keys -t "$session_name" "$command | tee -a $log_file" C-m
-        echo "Executed '$command' inside $session_name, logging to $log_file"
-    fi
+    echo "Running '$command' inside $session_name, logging to $log_file"
     echo
 }
 
 ##########################################################################################
 # Start servers
 ##########################################################################################
-# Authserver (no debug)
-start_tmux_session "$AUTHSERVER_SESSION" "${SERVER_ROOT}/acore.sh run-authserver" "$LOGS_PATH/authserver.log" 0
 
-# Worldserver (toggle debug)
-start_tmux_session "$WORLDSERVER_SESSION" "${SERVER_ROOT}/acore.sh run-worldserver" "$LOGS_PATH/worldserver.log" $DEBUG_MODE
+# Authserver always normal
+start_tmux_session "$AUTHSERVER_SESSION" "$AUTH_EXE" "$LOGS_PATH/authserver.log"
+
+# Worldserver normal or debug
+if [[ $DEBUG_MODE -eq 1 ]]; then
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    GDB_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
+    WORLD_COMMAND="gdb -ex \"set logging file $GDB_LOG\" \
+                   -ex \"set logging enabled on\" \
+                   -ex \"run\" \
+                   -ex \"bt full\" \
+                   -ex \"quit\" \
+                   --args $WORLD_EXE"
+    echo "DEBUG MODE: Running worldserver under GDB"
+else
+    WORLD_COMMAND="$WORLD_EXE"
+fi
+
+start_tmux_session "$WORLDSERVER_SESSION" "$WORLD_COMMAND" "$LOGS_PATH/worldserver.log"
 
 ##########################################################################################
 # Launch interactive menu if needed
