@@ -73,7 +73,7 @@ AUTH_CMD="${SERVER_ROOT}/_server/azerothcore/acore.sh run-authserver"
 # Worldserver: normal vs debug (GDB)
 if [[ $DEBUG_MODE -eq 1 ]]; then
     echo "DEBUG MODE: Worldserver will run under GDB"
-    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/run-engine restart worldserver \
+    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/src/run-engine restart worldserver \
         --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
         --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
         --session-manager tmux \
@@ -82,7 +82,7 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
         --crashes-path $CRASHES_PATH \
         --no-restart"
 else
-    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/run-engine restart worldserver \
+    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/src/run-engine restart worldserver \
         --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
         --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
         --session-manager tmux \
