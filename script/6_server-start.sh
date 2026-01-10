@@ -86,6 +86,7 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
                    -ex \"bt full\" \
                    -ex \"info threads\" \
                    -ex \"thread apply all bt full\" \
+                   -ex \"quit\" \
                    --args ./worldserver"
 else
 
