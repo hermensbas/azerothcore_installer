@@ -29,8 +29,9 @@ then
     # https://www.azerothcore.org/wiki/linux-core-installation
     ##########################################################################################
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler clean
-    sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler compile
+
 
     ##########################################################################################
     # set folder rights to current user
