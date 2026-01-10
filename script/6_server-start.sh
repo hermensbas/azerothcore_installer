@@ -1,40 +1,21 @@
 #!/bin/bash
-##########################################################################################
-# AzerothCore Server Start Script
-# - Normal mode: runs via acore.sh (auto-restart, normal logs)
-# - Debug mode: runs worldserver under GDB (no auto-restart, crash logs)
-##########################################################################################
 
-# ===============================
-# Configuration
-# ===============================
-ROOT_DIR="/home/dev/azerothcore_installer"
-SERVER_ROOT="$ROOT_DIR/_server/azerothcore"
+##########################################################################################
+# Paths for logs and crash dumps
+##########################################################################################
+export LOGS_PATH="/tmp/ac/logs"
+export CRASHES_PATH="/tmp/ac/crashes"
+mkdir -p "$LOGS_PATH" "$CRASHES_PATH"
 
+##########################################################################################
+# Sessions
+##########################################################################################
 AUTHSERVER_SESSION="auth-session"
 WORLDSERVER_SESSION="world-session"
 
-LOGS_PATH="/tmp/ac/logs"
-CRASHES_PATH="/tmp/ac/crashes"
-
-mkdir -p "$LOGS_PATH" "$CRASHES_PATH"
-
-# Timestamp for log files
-NOW=$(date +"%Y%m%d_%H%M%S")
-AUTH_LOG="$LOGS_PATH/authserver_$NOW.log"
-WORLD_LOG="$LOGS_PATH/worldserver_$NOW.log"
-GDB_LOG="$CRASHES_PATH/worldserver_gdb_$NOW.log"
-
-# Check for debug mode
-DEBUG_MODE=0
-if [[ "$1" == "debug" ]]; then
-    DEBUG_MODE=1
-    echo "DEBUG MODE: worldserver will run under GDB"
-fi
-
-# ===============================
-# Helper: start tmux session
-# ===============================
+##########################################################################################
+# Helper to start a tmux session and run a command
+##########################################################################################
 start_tmux_session() {
     local session_name=$1
     local command=$2
@@ -52,43 +33,37 @@ start_tmux_session() {
         fi
     fi
 
-    # Run the command in tmux, output redirected to log file (overwrite)
-    tmux send-keys -t "$session_name" "$command >$log_file 2>&1" C-m
-
-    echo "Running '$command' inside $session_name, logging to $log_file"
+    # Run the command in tmux and pipe to tee
+    tmux send-keys -t "$session_name" "$command 2>&1 | tee $log_file" C-m
+    echo "Running '$command' in $session_name, logging to $log_file"
     echo
 }
 
-# ===============================
-# Start Authserver
-# ===============================
-AUTH_CMD="$SERVER_ROOT/acore.sh run-authserver"
+##########################################################################################
+# Determine mode (debug or normal)
+##########################################################################################
+MODE="$1"  # script.sh debug
+DEBUG_MODE=0
+if [[ "$MODE" == "debug" ]]; then
+    DEBUG_MODE=1
+fi
+
+##########################################################################################
+# Prepare timestamped logs
+##########################################################################################
+AUTH_LOG="$LOGS_PATH/authserver_$(date +%Y%m%d_%H%M%S).log"
+WORLD_LOG="$LOGS_PATH/worldserver_$(date +%Y%m%d_%H%M%S).log"
+WORLD_CRASH_LOG="$CRASHES_PATH/worldserver_gdb_$(date +%Y%m%d_%H%M%S).log"
+
+##########################################################################################
+# Start authserver
+##########################################################################################
+AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
 start_tmux_session "$AUTHSERVER_SESSION" "$AUTH_CMD" "$AUTH_LOG"
 
-# ===============================
-# Start Worldserver
-# ===============================
+##########################################################################################
+# Start worldserver
+##########################################################################################
 if [[ $DEBUG_MODE -eq 1 ]]; then
-    WORLD_CMD="gdb -ex 'set logging file $GDB_LOG' \
-                  -ex 'set logging enabled on' \
-                  -ex 'run' \
-                  -ex 'bt full' \
-                  -ex 'quit' \
-                  --args $SERVER_ROOT/env/dist/bin/worldserver"
-else
-    WORLD_CMD="$SERVER_ROOT/acore.sh run-worldserver"
-fi
-
-start_tmux_session "$WORLDSERVER_SESSION" "$WORLD_CMD" "$WORLD_LOG"
-
-# ===============================
-# Launch menu
-# ===============================
-if [[ -f "$ROOT_DIR/script/menu.sh" ]]; then
-    source "$ROOT_DIR/script/menu.sh"
-else
-    echo "WARNING: menu.sh not found at $ROOT_DIR/script/menu.sh"
-fi
-
-echo "Server start script finished."
-[[ $DEBUG_MODE -eq 1 ]] && echo "DEBUG: worldserver GDB log: $GDB_LOG"
+    echo "DEBUG MODE: Running worldserver under GDB"
+    WORLD_CMD="gdb -ex 'set logging file $WORLD_CRASH_LOG' \
