@@ -75,7 +75,6 @@ AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
 if [[ $DEBUG_MODE -eq 1 ]]; then
     echo "DEBUG MODE: Running worldserver under GDB"
     WORLD_CMD="$RUN_ENGINE restart worldserver \
-        --bin-path ${SERVER_ROOT}/env/dist/bin \
         --server-config ${SERVER_ROOT}/conf/worldserver.conf \
         --session-manager tmux \
         --gdb-enabled 1 \
@@ -83,7 +82,6 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
         --crashes-path $CRASHES_PATH"
 else
     WORLD_CMD="$RUN_ENGINE restart worldserver \
-        --bin-path ${SERVER_ROOT}/env/dist/bin \
         --server-config ${SERVER_ROOT}/conf/worldserver.conf \
         --session-manager tmux \
         --logs-path $LOGS_PATH \
