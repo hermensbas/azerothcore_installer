@@ -5,7 +5,6 @@
 ##########################################################################################
 export LOGS_PATH="/tmp/ac/logs"
 export CRASHES_PATH="/tmp/ac/crashes"
-
 mkdir -p "$LOGS_PATH" "$CRASHES_PATH"
 
 ##########################################################################################
@@ -73,8 +72,9 @@ start_tmux_session() {
 # Authserver always via acore.sh for auto-restart
 AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
 
-# Worldserver command
+# Worldserver
 if [[ $DEBUG_MODE -eq 1 ]]; then
+    # DEBUG
     echo "DEBUG MODE: Running worldserver under GDB"
     WORLD_CMD="gdb -ex 'set logging file $GDB_LOG' \
                   -ex 'set logging enabled on' \
@@ -83,7 +83,8 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
                   -ex 'quit' \
                   --args $SERVER_ROOT/env/dist/bin/worldserver"
 else
-    WORLD_CMD="$SERVER_ROOT/acore.sh run-worldserver"
+    # NORMAL
+    WORLD_CMD="$SERVER_ROOT/_server/azerothcore/acore.sh run-worldserver"
 fi
 
 ##########################################################################################
