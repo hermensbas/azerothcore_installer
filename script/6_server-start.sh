@@ -6,22 +6,18 @@
 export LOGS_PATH="/tmp/ac/logs"
 export CRASHES_PATH="/tmp/ac/crashes"
 
-# Ensure directories exist
 mkdir -p "$LOGS_PATH" "$CRASHES_PATH"
 
 ##########################################################################################
-# handle the tmux sessions
-##########################################################################################
-
 # Helper to start a tmux session and run a command
+##########################################################################################
 start_tmux_session() {
     local session_name=$1
     local command=$2
     local log_file=$3
 
-    # Create session if it doesn't exist
     if tmux has-session -t "$session_name" 2>/dev/null; then
-        echo "Tmux session '$session_name' already exists, attaching command..."
+        echo "Tmux session '$session_name' already exists."
     else
         if tmux new-session -d -s "$session_name"; then
             echo "Created tmux session: $session_name"
@@ -41,11 +37,46 @@ start_tmux_session() {
     echo
 }
 
-# Start authserver
+##########################################################################################
+# Start authserver normally in tmux
+##########################################################################################
 start_tmux_session "$AUTHSERVER_SESSION" "${SERVER_ROOT}/acore.sh run-authserver" "$LOGS_PATH/authserver.log"
 
-# Start worldserver
-start_tmux_session "$WORLDSERVER_SESSION" "${SERVER_ROOT}/acore.sh run-worldserver" "$LOGS_PATH/worldserver.log" "export GDB_ENABLED=1"
+##########################################################################################
+# Start worldserver under tmux + GDB for crash logging
+##########################################################################################
+WORLDSESSION="$WORLDSERVER_SESSION"
+WORLD_CRASH_LOG="$CRASHES_PATH/worldserver_gdb.log"
+
+# Remove old crash log
+[ -f "$WORLD_CRASH_LOG" ] && rm -f "$WORLD_CRASH_LOG"
+
+# Create worldserver tmux session if needed
+if tmux has-session -t "$WORLDSESSION" 2>/dev/null; then
+    echo "Tmux session '$WORLDSESSION' already exists."
+else
+    if tmux new-session -d -s "$WORLDSESSION"; then
+        echo "Created tmux session: $WORLDSESSION"
+    else
+        echo "Error creating tmux session: $WORLDSESSION"
+        exit 1
+    fi
+fi
+
+# Command to run worldserver under gdb in tmux
+WORLD_CMD="gdb -ex 'set logging file $WORLD_CRASH_LOG' \
+    -ex 'set logging on' \
+    -ex 'run' \
+    -ex 'bt full' \
+    -ex 'quit' \
+    --args ${SERVER_ROOT}/acore.sh run-worldserver"
+
+# Export env + run GDB inside tmux
+tmux send-keys -t "$WORLDSESSION" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
+tmux send-keys -t "$WORLDSESSION" "$WORLD_CMD" C-m
+
+echo "Worldserver started in tmux session '$WORLDSESSION' with GDB crash logging to $WORLD_CRASH_LOG."
+echo "Attach to tmux to see live output: tmux attach -t $WORLDSESSION"
 
 ##########################################################################################
 # Launch interactive menu if needed
