@@ -5,6 +5,7 @@
 ##########################################################################################
 export LOGS_PATH="/tmp/ac/logs"
 export CRASHES_PATH="/tmp/ac/crashes"
+rm -rf "$LOGS_PATH" "$CRASHES_PATH"
 mkdir -p "$LOGS_PATH" "$CRASHES_PATH"
 
 ##########################################################################################
