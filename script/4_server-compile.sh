@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ "$1" == "debug" ]]; then
+    export CTYPE=RelWithDebInfo
+else
+    export CTYPE=Release
+fi
+
 read -p "This will compile server. Are you sure? (Y)es/(N)o: " -n 1 -r
 echo " ";
 if [[ $REPLY =~ ^[Yy]$ ]];
