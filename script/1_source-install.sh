@@ -51,6 +51,7 @@ then
              libreadline-dev \
              libncurses-dev \
              mysql-server \
+             gdb \
              libboost-all-dev
 
 
