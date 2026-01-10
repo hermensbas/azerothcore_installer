@@ -55,6 +55,9 @@ start_tmux_session() {
         return 1
     fi
 
+    # Export environment variables inside tmux
+    tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
+    
     # Run the command and pipe output to a log file
     tmux send-keys -t "$session_name" "$command" C-m
 
@@ -71,6 +74,7 @@ AUTH_CMD="${ROOT}/_server/azerothcore/acore.sh run-authserver"
 
 # Worldserver
 if [[ $DEBUG_MODE -eq 1 ]]; then
+
     #  via GDB with RelWithDebInfo or Debug build
     echo "DEBUG MODE: Running worldserver under GDB"
     WORLD_CMD="gdb -ex \"set logging file $GDB_LOG\" \
@@ -84,8 +88,6 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
                   --args $ROOT/_server/azerothcore/env/dist/bin/worldserver"
 else
 
-    # Export environment variables inside tmux
-    tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
     # via acore.sh for auto-restart
     WORLD_CMD="$ROOT/_server/azerothcore/acore.sh run-worldserver"
 fi
