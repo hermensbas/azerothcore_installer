@@ -66,43 +66,37 @@ start_tmux_session() {
 }
 
 ##########################################################################################
-# Prepare commands
+# Run services
 ##########################################################################################
 
-# Authserver via acore.sh for auto-restart
+# Start authserver via acore.sh for auto-restart
 AUTH_CMD="${ROOT}/_server/azerothcore/acore.sh run-authserver"
+start_tmux_session "$AUTHSERVER_SESSION" "$AUTH_CMD"
 
-# Worldserver
+# Start worldserver
 if [[ $DEBUG_MODE -eq 1 ]]; then
 
-    #  via GDB with RelWithDebInfo or Debug build
+    #  Run GDB directly in current terminal (no tmux) and with RelWithDebInfo or Debug build
     echo "DEBUG MODE: Running worldserver under GDB"
-    WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
-               gdb -ex \"set logging file $GDB_LOG\" \
-                   -ex \"set logging enabled on\" \
-                   -ex \"set pagination off\" \
-                   -ex \"set confirm off\" \
-                   -ex \"run -c ../etc/worldserver.conf\" \
-                   -ex \"bt full\" \
-                   -ex \"info threads\" \
-                   -ex \"thread apply all bt full\" \
-                   -ex \"quit\" \
-                   --args ./worldserver"
+    cd $ROOT/_server/azerothcore/env/dist/bin && \
+       gdb -ex \"set logging file $GDB_LOG\" \
+           -ex \"set logging enabled on\" \
+           -ex \"set pagination off\" \
+           -ex \"set confirm off\" \
+           -ex \"run -c ../etc/worldserver.conf\" \
+           -ex \"bt full\" \
+           -ex \"info threads\" \
+           -ex \"thread apply all bt full\" \
+           -ex \"quit\" \
+           --args ./worldserver
 else
 
     # via acore.sh for auto-restart
     WORLD_CMD="$ROOT/_server/azerothcore/acore.sh run-worldserver"
+    start_tmux_session "$WORLDSERVER_SESSION" "$WORLD_CMD"
 fi
 
 ##########################################################################################
-# Start servers
+# show menu
 ##########################################################################################
-start_tmux_session "$AUTHSERVER_SESSION" "$AUTH_CMD"
-start_tmux_session "$WORLDSERVER_SESSION" "$WORLD_CMD"
-
-##########################################################################################
-# Optional: show menu if exists
-##########################################################################################
-if [[ -f "${ROOT}/script/menu.sh" ]]; then
-    source "${ROOT}/script/menu.sh"
-fi
+source "${ROOT}/script/menu.sh"
