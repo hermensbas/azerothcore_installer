@@ -2,6 +2,8 @@
 
 if [[ "$1" == "debug" ]]; then
     export CTYPE=RelWithDebInfo
+    export CFLAGS="-g -O0 -fno-inline"
+    export CXXFLAGS="-g -O0 -fno-inline"
 else
     export CTYPE=Release
 fi
