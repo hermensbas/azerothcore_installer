@@ -73,12 +73,15 @@ AUTH_CMD="${ROOT}/_server/azerothcore/acore.sh run-authserver"
 if [[ $DEBUG_MODE -eq 1 ]]; then
     #  via GDB with RelWithDebInfo or Debug build
     echo "DEBUG MODE: Running worldserver under GDB"
-    WORLD_CMD="gdb -ex 'set logging file $GDB_LOG' \
-                  -ex 'set logging enabled on' \
-                  -ex 'run' \
-                  -ex 'bt full' \
-                  -ex 'quit' \
-                  --args $ROOT/env/dist/bin/worldserver"
+    WORLD_CMD="gdb -ex \"set logging file $GDB_LOG\" \
+                  -ex \"set logging enabled on\" \
+                  -ex \"set pagination off\" \
+                  -ex \"set confirm off\" \
+                  -ex \"run -c $ROOT/etc/worldserver.conf\" \
+                  -ex \"bt full\" \
+                  -ex \"info threads\" \
+                  -ex \"thread apply all bt full\" \
+                  --args $ROOT/_server/azerothcore/env/dist/bin/worldserver"
 else
     # via acore.sh for auto-restart
     WORLD_CMD="$ROOT/_server/azerothcore/acore.sh run-worldserver"
