@@ -82,6 +82,9 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
             -ex \"set logging on\" \
             -ex \"set pagination off\" \
             -ex \"set confirm off\" \
+            -ex \"set print pretty on\" \
+            -ex \"set print elements 0\" \
+            -ex \"set print object on\" \
             -ex \"catch signal SIGSEGV\" \
             -ex \"catch signal SIGABRT\" \
             -ex \"catch signal SIGFPE\" \
