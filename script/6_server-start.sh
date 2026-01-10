@@ -83,7 +83,7 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
            -ex \"set logging enabled on\" \
            -ex \"set pagination off\" \
            -ex \"set confirm off\" \
-           -ex \"run -c etc/worldserver.conf\" \
+           -ex \"run -c ../etc/worldserver.conf\" \
            -ex \"bt full\" \
            -ex \"info threads\" \
            -ex \"thread apply all bt full\" \
