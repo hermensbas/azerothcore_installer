@@ -9,7 +9,7 @@ export CRASHES_PATH="/tmp/ac/crashes"
 mkdir -p "$LOGS_PATH" "$CRASHES_PATH"
 
 ##########################################################################################
-# Sessions
+# Tmux sessions
 ##########################################################################################
 AUTHSERVER_SESSION="auth-session"
 WORLDSERVER_SESSION="world-session"
@@ -21,11 +21,13 @@ WORLD_LOG="$LOGS_PATH/worldserver_$TIMESTAMP.log"
 WORLD_CRASH_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
 
 ##########################################################################################
-# Determine SERVER_ROOT based on script location (works with aliases)
+# Determine ROOT_DIR based on script location
 ##########################################################################################
-SERVER_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-RUN_ENGINE="$SERVER_ROOT/_server/azerothcore/apps/startup-scripts/src/run-engine"
+# Paths to binaries
+AUTH_BIN="$ROOT_DIR/_server/azerothcore/env/dist/bin/authserver"
+WORLD_BIN="$ROOT_DIR/_server/azerothcore/env/dist/bin/worldserver"
 
 ##########################################################################################
 # Check debug toggle
@@ -69,23 +71,20 @@ start_tmux_session() {
 # Prepare commands
 ##########################################################################################
 
-# Authserver always via acore.sh for auto-restart
-AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
+# Authserver binary (normal mode)
+AUTH_CMD="$AUTH_BIN"
 
+# Worldserver binary
 if [[ $DEBUG_MODE -eq 1 ]]; then
     echo "DEBUG MODE: Running worldserver under GDB"
-    WORLD_CMD="$RUN_ENGINE restart worldserver \
-        --server-config ${SERVER_ROOT}/conf/worldserver.conf \
-        --session-manager tmux \
-        --gdb-enabled 1 \
-        --logs-path $LOGS_PATH \
-        --crashes-path $CRASHES_PATH"
+    WORLD_CMD="gdb -ex 'set logging file $WORLD_CRASH_LOG' \
+-ex 'set logging enabled on' \
+-ex 'run' \
+-ex 'bt full' \
+-ex 'quit' \
+--args $WORLD_BIN"
 else
-    WORLD_CMD="$RUN_ENGINE restart worldserver \
-        --server-config ${SERVER_ROOT}/conf/worldserver.conf \
-        --session-manager tmux \
-        --logs-path $LOGS_PATH \
-        --crashes-path $CRASHES_PATH"
+    WORLD_CMD="$WORLD_BIN"
 fi
 
 ##########################################################################################
@@ -97,6 +96,6 @@ start_tmux_session "$WORLDSERVER_SESSION" "$WORLD_CMD" "$WORLD_LOG"
 ##########################################################################################
 # Optional: show menu if exists
 ##########################################################################################
-if [[ -f "${SERVER_ROOT}/script/menu.sh" ]]; then
-    source "${SERVER_ROOT}/script/menu.sh"
+if [[ -f "${ROOT_DIR}/script/menu.sh" ]]; then
+    source "${ROOT_DIR}/script/menu.sh"
 fi
