@@ -81,11 +81,11 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
                   -ex \"set logging enabled on\" \
                   -ex \"set pagination off\" \
                   -ex \"set confirm off\" \
-                  -ex \"run -c $ROOT/env/dist/etc/worldserver.conf\" \
+                  -ex \"run -c $ROOT/_server/azerothcore/env/dist/etc/worldserver.conf\" \
                   -ex \"bt full\" \
                   -ex \"info threads\" \
                   -ex \"thread apply all bt full\" \
-                  --args $ROOT/env/dist/bin/worldserver"
+                  --args $ROOT/_server/azerothcore/env/dist/bin/worldserver"
 else
 
     # via acore.sh for auto-restart
