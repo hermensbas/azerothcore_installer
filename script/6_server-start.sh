@@ -56,7 +56,7 @@ start_tmux_session() {
     fi
 
     # Export environment variables inside tmux
-    tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
+    # tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
     
     # Run the command and pipe output to a log file
     tmux send-keys -t "$session_name" "$command" C-m
