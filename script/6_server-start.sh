@@ -83,6 +83,9 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
                   -ex \"thread apply all bt full\" \
                   --args $ROOT/_server/azerothcore/env/dist/bin/worldserver"
 else
+
+    # Export environment variables inside tmux
+    tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
     # via acore.sh for auto-restart
     WORLD_CMD="$ROOT/_server/azerothcore/acore.sh run-worldserver"
 fi
