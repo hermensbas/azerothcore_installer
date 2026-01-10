@@ -28,8 +28,9 @@ then
     # in that case 'compile build' is enough and much much faster
     # https://www.azerothcore.org/wiki/linux-core-installation
     ##########################################################################################
+    export CTYPE=RelWithDebInfo
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler clean
-    sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure
+    sudo -E ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler compile
 
 
