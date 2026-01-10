@@ -23,7 +23,7 @@ GDB_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
 ##########################################################################################
 # Determine SERVER_ROOT based on script location (works with aliases)
 ##########################################################################################
-SERVER_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 ##########################################################################################
 # Check debug toggle
@@ -39,7 +39,6 @@ fi
 start_tmux_session() {
     local session_name=$1
     local command=$2
-    local log_file=$3
 
     # If session exists, attach and return
     if tmux has-session -t "$session_name" 2>/dev/null; then
@@ -56,13 +55,10 @@ start_tmux_session() {
         return 1
     fi
 
-    # Export environment variables inside tmux
-    tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
-
     # Run the command and pipe output to a log file
-    tmux send-keys -t "$session_name" "$command | tee $log_file" C-m
+    tmux send-keys -t "$session_name" "$command" C-m
 
-    echo "Running '$command' in $session_name, logging to $log_file"
+    echo "Running '$command' in $session_name"
     echo
 }
 
@@ -70,33 +66,33 @@ start_tmux_session() {
 # Prepare commands
 ##########################################################################################
 
-# Authserver always via acore.sh for auto-restart
-AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
+# Authserver via acore.sh for auto-restart
+AUTH_CMD="${ROOT}/_server/azerothcore/acore.sh run-authserver"
 
 # Worldserver
 if [[ $DEBUG_MODE -eq 1 ]]; then
-    # DEBUG
+    #  via GDB with RelWithDebInfo or Debug build
     echo "DEBUG MODE: Running worldserver under GDB"
     WORLD_CMD="gdb -ex 'set logging file $GDB_LOG' \
                   -ex 'set logging enabled on' \
                   -ex 'run' \
                   -ex 'bt full' \
                   -ex 'quit' \
-                  --args $SERVER_ROOT/env/dist/bin/worldserver"
+                  --args $ROOT/env/dist/bin/worldserver"
 else
-    # NORMAL
-    WORLD_CMD="$SERVER_ROOT/_server/azerothcore/acore.sh run-worldserver"
+    # via acore.sh for auto-restart
+    WORLD_CMD="$ROOT/_server/azerothcore/acore.sh run-worldserver"
 fi
 
 ##########################################################################################
 # Start servers
 ##########################################################################################
-start_tmux_session "$AUTHSERVER_SESSION" "$AUTH_CMD" "$AUTH_LOG"
-start_tmux_session "$WORLDSERVER_SESSION" "$WORLD_CMD" "$WORLD_LOG"
+start_tmux_session "$AUTHSERVER_SESSION" "$AUTH_CMD"
+start_tmux_session "$WORLDSERVER_SESSION" "$WORLD_CMD"
 
 ##########################################################################################
 # Optional: show menu if exists
 ##########################################################################################
-if [[ -f "${SERVER_ROOT}/script/menu.sh" ]]; then
-    source "${SERVER_ROOT}/script/menu.sh"
+if [[ -f "${ROOT}/script/menu.sh" ]]; then
+    source "${ROOT}/script/menu.sh"
 fi
