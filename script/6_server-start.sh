@@ -42,9 +42,7 @@ start_tmux_session() {
     local log_file=$3
 
     # Create session if it doesn't exist
-    if tmux has-session -t "$session_name" 2>/dev/null; then
-        echo "Tmux session '$session_name' already exists."
-    else
+    if ! tmux has-session -t "$session_name" 2>/dev/null; then
         if tmux new-session -d -s "$session_name"; then
             echo "Created tmux session: $session_name"
         else
@@ -68,21 +66,23 @@ start_tmux_session() {
 ##########################################################################################
 
 # Authserver always via acore.sh for auto-restart
-AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
+AUTH_CMD="${SERVER_ROOT}/_server/azerothcore/acore.sh run-authserver"
 
+# Worldserver command
 if [[ $DEBUG_MODE -eq 1 ]]; then
-    echo "DEBUG MODE: Running worldserver under GDB"
+    echo "DEBUG MODE: Worldserver will run under GDB"
     WORLD_CMD="run-engine restart worldserver \
-        --bin-path ${SERVER_ROOT}/env/dist/bin \
-        --server-config ${SERVER_ROOT}/conf/worldserver.conf \
+        --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
+        --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
         --session-manager tmux \
         --gdb-enabled 1 \
         --logs-path $LOGS_PATH \
-        --crashes-path $CRASHES_PATH"
+        --crashes-path $CRASHES_PATH \
+        --no-restart"  # <-- disables auto-restart in debug
 else
     WORLD_CMD="run-engine restart worldserver \
-        --bin-path ${SERVER_ROOT}/env/dist/bin \
-        --server-config ${SERVER_ROOT}/conf/worldserver.conf \
+        --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
+        --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
         --session-manager tmux \
         --logs-path $LOGS_PATH \
         --crashes-path $CRASHES_PATH"
