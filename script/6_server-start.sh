@@ -42,7 +42,9 @@ start_tmux_session() {
     local log_file=$3
 
     # Create session if it doesn't exist
-    if ! tmux has-session -t "$session_name" 2>/dev/null; then
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+        echo "Tmux session '$session_name' already exists."
+    else
         if tmux new-session -d -s "$session_name"; then
             echo "Created tmux session: $session_name"
         else
@@ -54,7 +56,7 @@ start_tmux_session() {
     # Export environment variables inside tmux
     tmux send-keys -t "$session_name" "export LOGS_PATH=$LOGS_PATH; export CRASHES_PATH=$CRASHES_PATH" C-m
 
-    # Run the command and pipe output to a **new log file**
+    # Run the command and pipe output to a new log file
     tmux send-keys -t "$session_name" "$command | tee $log_file" C-m
 
     echo "Running '$command' in $session_name, logging to $log_file"
@@ -68,19 +70,19 @@ start_tmux_session() {
 # Authserver always via acore.sh for auto-restart
 AUTH_CMD="${SERVER_ROOT}/_server/azerothcore/acore.sh run-authserver"
 
-# Worldserver command
+# Worldserver: normal vs debug (GDB)
 if [[ $DEBUG_MODE -eq 1 ]]; then
     echo "DEBUG MODE: Worldserver will run under GDB"
-    WORLD_CMD="run-engine restart worldserver \
+    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/run-engine restart worldserver \
         --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
         --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
         --session-manager tmux \
         --gdb-enabled 1 \
         --logs-path $LOGS_PATH \
         --crashes-path $CRASHES_PATH \
-        --no-restart"  # <-- disables auto-restart in debug
+        --no-restart"
 else
-    WORLD_CMD="run-engine restart worldserver \
+    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/run-engine restart worldserver \
         --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
         --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
         --session-manager tmux \
