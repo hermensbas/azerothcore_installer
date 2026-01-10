@@ -78,16 +78,22 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
     #  via GDB with RelWithDebInfo or Debug build
     echo "DEBUG MODE: Running worldserver under GDB"
     WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
-               gdb -ex \"set logging file $GDB_LOG\" \
-                   -ex \"set logging enabled on\" \
-                   -ex \"set pagination off\" \
-                   -ex \"set confirm off\" \
-                   -ex \"run -c ../etc/worldserver.conf\" \
-                   -ex \"bt full\" \
-                   -ex \"info threads\" \
-                   -ex \"thread apply all bt full\" \
-                   -ex \"quit\" \
-                   --args ./worldserver"
+        gdb -ex \"set logging file $GDB_LOG\" \
+            -ex \"set logging on\" \
+            -ex \"set pagination off\" \
+            -ex \"set confirm off\" \
+            -ex \"set print thread-events on\" \
+            -ex \"set print object on\" \
+            -ex \"catch signal SIGSEGV\" \
+            -ex \"catch signal SIGABRT\" \
+            -ex \"catch signal SIGFPE\" \
+            -ex \"catch signal SIGILL\" \
+            -ex \"run -c ../etc/worldserver.conf\" \
+            -ex \"thread apply all bt full\" \
+            -ex \"info threads\" \
+            -ex \"thread apply all info locals\" \
+            -ex \"quit\" \
+            --args ./worldserver"
 else
 
     # via acore.sh for auto-restart
