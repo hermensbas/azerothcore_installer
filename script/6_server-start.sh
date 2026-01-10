@@ -25,7 +25,7 @@ WORLD_CRASH_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
 ##########################################################################################
 SERVER_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-RUN_ENGINE="$SERVER_ROOT/apps/_server/azerothcore/startup-scripts/src/run-engine"
+RUN_ENGINE="$SERVER_ROOT/_server/azerothcore/apps/startup-scripts/src/run-engine"
 
 ##########################################################################################
 # Check debug toggle
