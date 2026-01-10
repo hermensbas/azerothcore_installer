@@ -25,6 +25,8 @@ WORLD_CRASH_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
 ##########################################################################################
 SERVER_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+RUN_ENGINE="$SERVER_ROOT/apps/startup-scripts/src/run-engine"
+
 ##########################################################################################
 # Check debug toggle
 ##########################################################################################
@@ -68,23 +70,21 @@ start_tmux_session() {
 ##########################################################################################
 
 # Authserver always via acore.sh for auto-restart
-AUTH_CMD="${SERVER_ROOT}/_server/azerothcore/acore.sh run-authserver"
+AUTH_CMD="${SERVER_ROOT}/acore.sh run-authserver"
 
-# Worldserver: normal vs debug (GDB)
 if [[ $DEBUG_MODE -eq 1 ]]; then
-    echo "DEBUG MODE: Worldserver will run under GDB"
-    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/src/run-engine restart worldserver \
-        --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
-        --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
+    echo "DEBUG MODE: Running worldserver under GDB"
+    WORLD_CMD="$RUN_ENGINE restart worldserver \
+        --bin-path ${SERVER_ROOT}/env/dist/bin \
+        --server-config ${SERVER_ROOT}/conf/worldserver.conf \
         --session-manager tmux \
         --gdb-enabled 1 \
         --logs-path $LOGS_PATH \
-        --crashes-path $CRASHES_PATH \
-        --no-restart"
+        --crashes-path $CRASHES_PATH"
 else
-    WORLD_CMD="${SERVER_ROOT}/_server/azerothcore/apps/startup-scripts/src/run-engine restart worldserver \
-        --bin-path ${SERVER_ROOT}/_server/azerothcore/env/dist/bin \
-        --server-config ${SERVER_ROOT}/_server/azerothcore/conf/worldserver.conf \
+    WORLD_CMD="$RUN_ENGINE restart worldserver \
+        --bin-path ${SERVER_ROOT}/env/dist/bin \
+        --server-config ${SERVER_ROOT}/conf/worldserver.conf \
         --session-manager tmux \
         --logs-path $LOGS_PATH \
         --crashes-path $CRASHES_PATH"
