@@ -45,7 +45,7 @@ start_tmux_session() {
 start_tmux_session "$AUTHSERVER_SESSION" "${SERVER_ROOT}/acore.sh run-authserver" "$LOGS_PATH/authserver.log"
 
 # Start worldserver
-start_tmux_session "$WORLDSERVER_SESSION" "${SERVER_ROOT}/acore.sh run-worldserver" "$LOGS_PATH/worldserver.log"
+start_tmux_session "$WORLDSERVER_SESSION" "${SERVER_ROOT}/acore.sh run-worldserver" "$LOGS_PATH/worldserver.log" "export GDB_ENABLED=1"
 
 ##########################################################################################
 # Launch interactive menu if needed
