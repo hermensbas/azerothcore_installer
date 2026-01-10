@@ -30,7 +30,7 @@ then
     ##########################################################################################
     export AC_CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo -E ${ROOT_DIR}/_server/azerothcore/acore.sh compiler clean
-    sudo -E compiler configure
+    sudo -E ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure
     sudo -E ${ROOT_DIR}/_server/azerothcore/acore.sh compiler compile
 
 
