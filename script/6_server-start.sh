@@ -18,6 +18,10 @@ if [[ "$1" == "debug" ]]; then
     DEBUG_MODE=1
 fi
 
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+AUTH_LOG="$LOGS_PATH/authserver_$TIMESTAMP.log"
+WORLD_LOG="$LOGS_PATH/worldserver_$TIMESTAMP.log"
+
 ##########################################################################################
 # Helper function to start tmux session
 ##########################################################################################
@@ -37,7 +41,8 @@ start_tmux_session() {
         fi
     fi
 
-    tmux send-keys -t "$session_name" "$command | tee -a $log_file" C-m
+    # Redirect output to log file (new file)
+    tmux send-keys -t "$session_name" "$command | tee $log_file" C-m
     echo "Running '$command' in $session_name, logging to $log_file"
     echo
 }
@@ -45,14 +50,13 @@ start_tmux_session() {
 ##########################################################################################
 # Start authserver (always normal)
 ##########################################################################################
-start_tmux_session "$AUTHSERVER_SESSION" "$SERVER_ROOT/acore.sh run-authserver" "$LOGS_PATH/authserver.log"
+start_tmux_session "$AUTHSERVER_SESSION" "$SERVER_ROOT/acore.sh run-authserver" "$AUTH_LOG"
 
 ##########################################################################################
 # Start worldserver
 ##########################################################################################
 if [[ $DEBUG_MODE -eq 1 ]]; then
     # Debug mode: run binary directly under GDB
-    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
     GDB_LOG="$CRASHES_PATH/worldserver_gdb_$TIMESTAMP.log"
 
     GDB_CMD="gdb -ex \"set logging file $GDB_LOG\" \
@@ -62,13 +66,13 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
                -ex \"quit\" \
                --args $SERVER_ROOT/env/dist/bin/worldserver"
 
-    start_tmux_session "$WORLDSERVER_SESSION" "$GDB_CMD" "$LOGS_PATH/worldserver.log"
+    start_tmux_session "$WORLDSERVER_SESSION" "$GDB_CMD" "$WORLD_LOG"
 
     echo "DEBUG MODE: worldserver running under GDB, crash log: $GDB_LOG"
 
 else
     # Normal mode: use acore.sh for auto-restart
-    start_tmux_session "$WORLDSERVER_SESSION" "$SERVER_ROOT/acore.sh run-worldserver" "$LOGS_PATH/worldserver.log"
+    start_tmux_session "$WORLDSERVER_SESSION" "$SERVER_ROOT/acore.sh run-worldserver" "$WORLD_LOG"
 fi
 
 ##########################################################################################
