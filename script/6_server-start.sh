@@ -75,10 +75,11 @@ AUTH_CMD="${ROOT}/_server/azerothcore/acore.sh run-authserver"
 # Worldserver
 if [[ $DEBUG_MODE -eq 1 ]]; then
 
-    #  via GDB with RelWithDebInfo or Debug build
+    #  via GDB with RelWithDebInfo or Debug build (debuginfod downloads missing symbols real-time)
     echo "DEBUG MODE: Running worldserver under GDB"
     WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
         gdb -ex \"set logging file $GDB_LOG\" \
+            -ex \"set debuginfod enabled on\" \
             -ex \"set logging on\" \
             -ex \"set pagination off\" \
             -ex \"set confirm off\" \
