@@ -205,6 +205,9 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 .gps
 .go xyz
 /whisper bot nc +debug
+playerbots pmon toggle
+playerbots pmon stack
+.playerbots debug bg showpath=all (only work in BG)
 ```
 
 ## useful bot commands 
@@ -237,8 +240,6 @@ nc -pvp
 # After init or talents respec make sure you reset bot AI (see unbot).
 .playerbot bot add <name-of-character-on-account> (or account name instead of character name to add all characters on an account
 
-# while in BG
-.playerbots debug bg showpath=all 
 ```
 
 Tank attack @dps attack in 10 seconds
