@@ -80,7 +80,6 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
     echo "When crash type: 'bt full' and then 'thread apply all bt'"
     WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
       gdb \
-        -x $ROOT/gdb_crash.gdb \
         -ex \"set logging file $GDB_LOG\" \
         -ex \"set debuginfod enabled on\" \
         -ex \"set logging enabled on\" \
