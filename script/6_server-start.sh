@@ -111,8 +111,7 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
         #thread apply all bt
         #set logging off
         #quit
-
-
+else
     # via acore.sh for auto-restart
     WORLD_CMD="$ROOT/_server/azerothcore/acore.sh run-worldserver"
 fi
