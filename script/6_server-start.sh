@@ -80,6 +80,7 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
     echo "When crash type: 'bt full' and then 'thread apply all bt'"
     WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
         gdb \
+          -ex \"set inferior-tty /dev/tty\" \
           -ex \"set logging file $GDB_LOG\" \
           -ex \"set debuginfod enabled on\" \
           -ex \"set logging enabled on\" \
@@ -93,6 +94,7 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
           -ex \"handle SIGFPE stop print pass\" \
           -ex \"handle SIGILL stop print pass\" \
           --args ./worldserver -c ../etc/worldserver.conf"
+
 else
 
     # via acore.sh for auto-restart
