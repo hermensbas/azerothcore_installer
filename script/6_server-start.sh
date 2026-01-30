@@ -86,15 +86,9 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
         -ex \"set pagination off\" \
         -ex \"set confirm off\" \
         -ex \"set print pretty on\" \
-        -ex \"set print elements 0\" \
         -ex \"set print object on\" \
-        -ex \"handle SIGSEGV stop print pass\" \
-        -ex \"handle SIGABRT stop print pass\" \
-        -ex \"handle SIGFPE stop print pass\" \
-        -ex \"handle SIGILL stop print pass\" \
         -ex \"run\" \
         --args ./worldserver -c ../etc/worldserver.conf"
-
 else
 
     # via acore.sh for auto-restart
