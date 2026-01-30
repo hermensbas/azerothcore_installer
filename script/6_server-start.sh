@@ -77,7 +77,6 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
 
     #  via GDB with RelWithDebInfo or Debug build (debuginfod downloads missing symbols real-time)
     echo "DEBUG MODE: Running worldserver under GDB"
-    echo "To start: 'run'"
     echo "When crash type: 'bt full' and then 'thread apply all bt'"
     WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
       gdb \
