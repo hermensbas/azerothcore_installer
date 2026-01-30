@@ -78,24 +78,24 @@ if [[ $DEBUG_MODE -eq 1 ]]; then
     #  via GDB with RelWithDebInfo or Debug build (debuginfod downloads missing symbols real-time)
     echo "DEBUG MODE: Running worldserver under GDB"
     WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
-        gdb -ex \"set logging file $GDB_LOG\" \
-            -ex \"set debuginfod enabled on\" \
-            -ex \"set logging on\" \
-            -ex \"set pagination off\" \
-            -ex \"set confirm off\" \
-            -ex \"set print pretty on\" \
-            -ex \"set print elements 0\" \
-            -ex \"set print object on\" \
-            -ex \"catch signal SIGSEGV\" \
-            -ex \"catch signal SIGABRT\" \
-            -ex \"catch signal SIGFPE\" \
-            -ex \"catch signal SIGILL\" \
-            -ex \"run -c ../etc/worldserver.conf\" \
-            -ex \"bt full\" \
-            -ex \"info locals\" \
-            -ex \"info threads\" \
-            -ex \"quit\" \
-            --args ./worldserver"
+        gdb \
+          -ex \"set logging file $GDB_LOG\" \
+          -ex \"set debuginfod enabled on\" \
+          -ex \"set logging on\" \
+          -ex \"set pagination off\" \
+          -ex \"set confirm off\" \
+          -ex \"set print pretty on\" \
+          -ex \"set print elements 0\" \
+          -ex \"set print object on\" \
+          -ex \"handle SIGSEGV stop print pass\" \
+          -ex \"handle SIGABRT stop print pass\" \
+          -ex \"handle SIGFPE stop print pass\" \
+          -ex \"handle SIGILL stop print pass\" \
+          -ex \"define hook-stop\" \
+          -ex \"bt full\" \
+          -ex \"thread apply all bt\" \
+          -ex \"end\" \
+          --args ./worldserver -c ../etc/worldserver.conf"
 else
 
     # via acore.sh for auto-restart
