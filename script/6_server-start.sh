@@ -76,20 +76,42 @@ AUTH_CMD="${ROOT}/_server/azerothcore/acore.sh run-authserver"
 if [[ $DEBUG_MODE -eq 1 ]]; then
 
     #  via GDB with RelWithDebInfo or Debug build (debuginfod downloads missing symbols real-time)
-    echo "DEBUG MODE: Running worldserver under GDB"
-    echo "When crash type: 'bt full' and then 'thread apply all bt'"
+    echo
+    echo "======================================================"
+    echo " WORLD SERVER DEBUG MODE (GDB)"
+    echo "------------------------------------------------------"
+    echo " When a crash happens, type the following in GDB:"
+    echo
+    echo "   bt full"
+    echo "   thread apply all bt"
+    echo "   set logging off"
+    echo "   quit"
+    echo
+    echo " Crash log will be saved to:"
+    echo "   $GDB_LOG"
+    echo "======================================================"
+    echo
+    read -p "Press ENTER to continue..."
+    echo
     WORLD_CMD="cd $ROOT/_server/azerothcore/env/dist/bin && \
       gdb \
         -ex \"set logging file $GDB_LOG\" \
         -ex \"set debuginfod enabled on\" \
-        -ex \"set logging enabled on\" \
+        -ex \"set logging overwrite on\" \
+        -ex \"set logging on\" \
         -ex \"set pagination off\" \
         -ex \"set confirm off\" \
         -ex \"set print pretty on\" \
         -ex \"set print object on\" \
         -ex \"run\" \
         --args ./worldserver -c ../etc/worldserver.conf"
-else
+
+        # when crash
+        # bt full
+        #thread apply all bt
+        #set logging off
+        #quit
+
 
     # via acore.sh for auto-restart
     WORLD_CMD="$ROOT/_server/azerothcore/acore.sh run-worldserver"
