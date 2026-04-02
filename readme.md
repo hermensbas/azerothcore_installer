@@ -205,6 +205,7 @@ Use the above (ifconfig) IP for the following router poort-forwarding and/or fir
 .gps
 .go xyz
 /whisper bot nc +debug
+/whisper rpg status
 playerbots pmon toggle
 playerbots pmon stack
 .playerbots debug bg showpath=all (only work in BG)
