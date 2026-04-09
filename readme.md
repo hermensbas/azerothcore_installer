@@ -236,8 +236,10 @@ nc +pvp
 nc -pvp
 
 # equip urself
-'.playerbot bot self', whisper yourself 'maintenance', whisper yourself 'autogear',
-whisper yourself 'nc +new rpg,+grind' or
+'.playerbot bot self', w
+hisper yourself 'maintenance',
+whisper yourself 'autogear',
+(whisper yourself 'nc +new rpg,+grind')
 whisper: nc +new rpg,+grind,+gather,+loot,+quest
 
 # After init or talents respec make sure you reset bot AI (see unbot).
