@@ -37,7 +37,7 @@ then
     # https://www.azerothcore.org/wiki/linux-core-installation
     ##########################################################################################
     #nano ${ROOT_DIR}/_server/azerothcore/conf/dist/config.sh
-    #export CTOOLS_BUILD=all
+    export CTOOLS_BUILD=all
     
     sudo ${ROOT_DIR}/_server/azerothcore/acore.sh compiler clean
     sudo -E ${ROOT_DIR}/_server/azerothcore/acore.sh compiler configure
