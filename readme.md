@@ -90,8 +90,7 @@ chmod +x *.sh
 ip -4 addr                     # find your server IP (or: ifconfig)
 nano settings.env              # set REALM_IP, REALM_NAME, repos/branches, client-data
 
-./setup.sh
-source ~/.bashrc               # needed once, to load the aliases
+./setup.sh && source ~/.bashrc   # source loads the aliases into the current shell
 
 install                        # download sources + client-data
 build                          # copy sources into _server/ and unpack client-data
@@ -99,7 +98,7 @@ compile
 ```
 
 `settings.env` selects the core and module repositories/branches (currently `test-staging`)
-and the client-data release. After changing it, run `./setup.sh` and `source ~/.bashrc` again;
+and the client-data release. After changing it, run `./setup.sh && source ~/.bashrc` again;
 a changed `AC_CLIENT_DATA` is downloaded again on the next `install`.
 
 ### Step 2 – Disable playerbots and ahbot for the first start
