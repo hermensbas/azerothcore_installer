@@ -1,32 +1,42 @@
 # azerothcore_installer
-For development and play
-
+AzerothCore (WotLK 3.3.5a) + mod-playerbots installer, for development and play.
 
 [![Intro!](https://i3.ytimg.com/vi/iCn14KLCerY/maxresdefault.jpg)](https://www.youtube.com/watch?v=iCn14KLCerY)
 
-## Server setup
- - VMWARE player
- - ubuntu-24.04-live-server-amd64.iso (minimal setup)
- - 100GB disk
- - 64 GB memory
- - assigned 16 threads (8 cores, 2 cores per thread) running on AMD 7945HX
- - network (bridged mode)
+## Contents
+- [Server setup](#server-setup)
+- [Installation](#installation)
+- [Daily use](#daily-use)
+- [Client](#client)
+- [Useful GM commands](#useful-gm-commands)
+- [Useful bot commands](#useful-bot-commands)
+- More playerbot docs: [wiki/](wiki/Home.md)
 
-#### mysql 8.4.x (LTS)
-```
-mysql --help | grep my.cnf
-sudo nano /etc/mysql/my.cnf
+## Server setup
+- VMware Player
+- `ubuntu-24.04-live-server-amd64.iso` (minimal setup)
+- 100 GB disk
+- 64 GB memory
+- 16 threads assigned (AMD 7945HX)
+- Network in bridged mode
+
+### MySQL 8.4.x (LTS)
+Installation: see [install_mysql_8.4.2_lts.md](install_mysql_8.4.2_lts.md).
+
+```bash
+mysql --help | grep my.cnf                # where my.cnf is read from
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo systemctl restart mysql
-SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
-# error while restart?
+# restart failed?
 sudo journalctl -xeu mysql.service --no-pager | tail -n 30
 ```
+Check in mysql: `SHOW VARIABLES LIKE 'innodb_buffer_pool_size';`
 
-/etc/mysql/mysql.conf.d/mysqld.cnf
-```
+`/etc/mysql/mysql.conf.d/mysqld.cnf` (tuned for 64 GB RAM / NVMe):
+```ini
 [mysqld]
 # ------------------ Memory Usage ------------------
-innodb_buffer_pool_size = 24G          
+innodb_buffer_pool_size = 24G
 innodb_buffer_pool_instances = 8
 innodb_log_buffer_size = 512M
 innodb_redo_log_capacity = 2G
@@ -40,9 +50,6 @@ innodb_io_capacity_max = 16000              # Maximize during bursts
 # ------------------ Temp Tables & Buffers ------------------
 tmp_table_size = 256M
 max_heap_table_size = 256M
-table_open_cache = 4096
-open_files_limit = 65535
-thread_cache_size = 200
 join_buffer_size = 2M
 sort_buffer_size = 4M
 read_buffer_size = 2M
@@ -67,192 +74,211 @@ slow_query_log = 1
 slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 1
 log_queries_not_using_indexes = 1
-binlog_expire_logs_seconds = 604800   # 7 days
+binlog_expire_logs_seconds = 604800         # 7 days
 ```
 
-## How to start
-### Step 1
+## Installation
+
+### Step 1 – Install and compile
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo apt install -y git net-tools nano
 
 git clone https://github.com/hermensbas/azerothcore_installer.git
-cd azerothcore_installer.git
+cd azerothcore_installer
 chmod +x *.sh
 
-ifconfig (in order to find your ip)
-nano settings.env (update ur settings)
+ip -4 addr                     # find your server IP (or: ifconfig)
+nano settings.env              # set REALM_IP, REALM_NAME, repos/branches, client-data
 
 ./setup.sh
- source ~/.bashrc
+source ~/.bashrc               # needed once, to load the aliases
 
-update
-build
+install                        # download sources + client-data
+build                          # copy sources into _server/ and unpack client-data
 compile
 ```
 
-### Step 2
-disable playerbots
-```bash
-nano config/modules/playerbots.config
-AiPlayerbot.Enabled = 0
+`settings.env` selects the core and module repositories/branches (currently `test-staging`)
+and the client-data release. After changing it, run `./setup.sh` and `source ~/.bashrc` again;
+a changed `AC_CLIENT_DATA` is downloaded again on the next `install`.
+
+### Step 2 – Disable playerbots and ahbot for the first start
+`config/modules/playerbots.conf`
+```ini
+Playerbots.Enabled = 0
 ```
 
-disable ahbot
-```bash
-nano config/modules/mod_ahbot.config
-#AuctionHouseBot.Account = 0
+`config/modules/mod_ahbot.conf`
+```ini
 AuctionHouseBot.GUID = 0
-AuctionHouseBot.EnableSeller = 0
-#AuctionHouseBot.EnableBuyer = 0
+AuctionHouseBot.EnableSeller = false
 ```
 
-### Step 3
-Start the server
+### Step 3 – Start the server and create accounts
 ```bash
 config
 start
+wow
 ```
 
-Create accounts
-```bash
-> account create ahbot mypass 
-> account create admin mypass
-> account set gmlevel admin 3 -1 
+In the worldserver console:
+```
+account create ahbot mypass
+account create admin mypass
+account set gmlevel admin 3 -1
 ```
 
-### Step 4 
-Logon the server with 'ahbot' and create lvl 1 char and logoff again.
+### Step 4 – Set up the ahbot character
+Log on with `ahbot`, create a level 1 character and log off again.
 
-Find ah-bot character settings
+Look up its character id:
 ```bash
-./script/find-character.sh ahbot
+./script/find_characters.sh ahbot
 accountId       characterName   characterId
 1       Yappe   1
 Find character executed...
 ```
 
-Configure and enable ahbot
-```bash
-nano config/modules/mod_ahbot.config
-#AuctionHouseBot.Account = 1
+Enable ahbot with that id in `config/modules/mod_ahbot.conf`:
+```ini
 AuctionHouseBot.GUID = 1
-AuctionHouseBot.EnableSeller = 1
-#AuctionHouseBot.EnableBuyer = 1
+AuctionHouseBot.EnableSeller = true
 ```
 
-Enable playerbots
-```bash
-nano config/modules/playerbots.config
-AiPlayerbot.Enabled = 1
+Enable playerbots in `config/modules/playerbots.conf`:
+```ini
+Playerbots.Enabled = 1
 ```
 
-### Step 5 
-
-Stop server, re-apply configuration, and start server
+### Step 5 – Apply the configuration and restart
+Detach from the console with `Ctrl-b` then `d`, then:
 ```bash
-ctrl + z
 stop
 config
 start
 ```
 
+### MMaps for playerbots (optional)
+The client-data release ships stock AzerothCore mmaps. The playerbots core additionally tags
+steep slopes for the bot pathfinder, which needs mmaps generated with the core's own
+`mmaps_generator`. Use `extract_ac_client_data.sh` from mod-playerbots with only
+`EXTRACT_MMAPS=true` (no WoW client needed). Note that `build` recreates `_server/`,
+so regenerated mmaps have to be generated again (or copied back) after a `build`.
+
+## Daily use
+Type `menu` for all commands.
+
+| Command | What it does |
+|---|---|
+| `install` | Download the source code and client-data |
+| `update` | Update the source code to the latest version |
+| `build` | Build the server folder from the source code |
+| `compile` / `compile_debug` | Compile (Release / RelWithDebInfo) |
+| `config` | Apply the configuration from `config/` |
+| `start` / `start_debug` | Start auth and world in tmux sessions (debug = GDB) |
+| `stop` | Stop all sessions |
+| `wow` / `auth` | Attach to the worldserver / authserver console |
+
+In the `wow` / `auth` console (tmux):
+- Scroll with the mouse wheel (set up by `setup.sh`), or `Ctrl-b` then `[` and arrow keys / PgUp (`q` to quit).
+- Detach without stopping the server: `Ctrl-b` then `d`.
+- Select text for copying to your PC: hold `Shift` while selecting.
+
 ## Client
 - 3.3.5a (Chromiecraft.com)
- - Chromiecraft HD patch optional or huge patch 2024 [23GB graphic patch](https://github.com/Marotheit/A-Guide-to-Modernizing-the-WotLK-Client/)
+- Optional: Chromiecraft HD patch, or the huge 2024 patch: [23 GB graphics patch](https://github.com/Marotheit/A-Guide-to-Modernizing-the-WotLK-Client/)
 
-Personally i prefere the chromiecraft HD patch without the T-patch, blizzlike :)
+Personally I prefer the Chromiecraft HD patch without the T-patch, blizzlike :)
 
-##### ip server config
-Configure your server IP in 'data/enUS/realmlist.wtf' files
+### Server IP
+Set your server IP in the client's `Data/enUS/realmlist.wtf`.
 
-##### Addons ([download](https://felbite.com/chromiecraft-addons)):
+### Addons ([download](https://felbite.com/chromiecraft-addons))
 - Allstats
-- Mapster (map fog disabled, we wanna explore instead seeing the whole map out of the box)
+- Mapster (map fog disabled — we want to explore instead of seeing the whole map out of the box)
 - Grid
-- UnBot ([english version](https://github.com/noisiver/unbot-addon/tree/english)) 
+- UnBot ([English version](https://github.com/noisiver/unbot-addon/tree/english))
 - [AI_VoiceOver](https://github.com/mrthinger/wow-voiceover/releases/download/v1.4.3/AI_VoiceOver-WoW_3.3.5-v1.4.3.zip)
 - [AI_VoiceOverData_Vanilla](https://github.com/mrthinger/wow-voiceover/releases/download/v1.3.1/AI_VoiceOverData_Vanilla-v1.0.0.zip)
-- https://gitlab.com/Tsoukie/compactraidframe-3.3.5
-- https://github.com/Macx-Lio/MultiBot (still under development)
+- [CompactRaidFrame](https://gitlab.com/Tsoukie/compactraidframe-3.3.5)
+- [MultiBot](https://github.com/Macx-Lio/MultiBot) (still under development)
 
-## Router port-forward if public
-Use the above (ifconfig) IP for the following router poort-forwarding and/or firewall rules settings.
-````
-# 3724 TCP AUTH-SERVER
-# 8085 TCP WORLD-SERVER
-````
-
-## useful AC GM commands
-[Wiki reference](https://www.azerothcore.org/wiki/gm-commands)
-```bash
-.server info (shows latency and amount of bots)
-.modify speed <default 1>
-.gm fly on | off
-.modify money
-.appear
-.server shutdown 5
-.maxskill
-.learn all my class
-.level <amount of levels to add>
-.character level <name> <level>
-.teleport orgrimmar or .tel orgrimmar)
-.leave (when you want the group to leave you alone!)
-.addItem itemName (or ctrl+click the item)
-.lookup item ThunderFury
-.lookup event moonfair
-.event start|stop id
-.distance (amount of yards between you and selected target)
-.gps
-.go xyz
-/whisper bot nc +debug
-/whisper bot nc +debug spell
-/whisper rpg status
-playerbots pmon toggle
-playerbots pmon stack
-.playerbots debug bg showpath=all (only work in BG)
+### Router port-forward (public server)
+Forward these ports to the server IP found in step 1 (router and/or firewall):
+```
+3724 TCP  authserver
+8085 TCP  worldserver
 ```
 
-## useful bot commands 
-Code references
-- See [mod-playerbot/src/strategy/actions/ChatActionContext.h](https://github.com/hermensbas/mod-playerbots/blob/master/src/strategy/actions/ChatActionContext.h) | cpp
-- See [mod-playerbot/src/strategy/action/ActionContext.h](https://github.com/hermensbas/mod-playerbots/blob/master/src/strategy/actions/ActionContext.h) | cpp
-- See [mod-playerbot/src/ChatFilter.cp](https://github.com/hermensbas/mod-playerbots/blob/master/src/ChatFilter.cpp)
-- See [mod-playerbot/src/PlayerbotMgr.cpp](https://github.com/hermensbas/mod-playerbots/blob/master/src/PlayerbotMgr.cpp#L692)
-- See unbot add-on tooltips
+## Useful GM commands
+[Wiki reference](https://www.azerothcore.org/wiki/gm-commands)
+```
+.server info                    shows latency and number of bots
+.server shutdown 5
+.modify speed <default 1>
+.modify money
+.gm fly on | off
+.appear
+.maxskill
+.learn all my class
+.level <levels to add>
+.character level <name> <level>
+.teleport orgrimmar             (or .tel orgrimmar)
+.leave                          leave the group (when you want the group to leave you alone)
+.additem <itemName>             (or ctrl+click the item)
+.lookup item Thunderfury
+.lookup event moonfair
+.event start|stop <id>
+.distance                       yards between you and the selected target
+.gps
+.go xyz
+```
 
-```bash
-# Unbot has init=auto but that doesnt always work, esp when ur level 1 (for now) alternativy use
-# the following or when the bots are to strong you can lower the equipment.
+Playerbot debugging:
+```
+/whisper <bot> nc +debug
+/whisper <bot> nc +debug spell
+/whisper <bot> rpg status
+.playerbots pmon toggle
+.playerbots pmon stack
+.playerbots debug bg showpath=all     (only works in BGs)
+```
 
+## Useful bot commands
+More in [wiki/Playerbot-Commands.md](wiki/Playerbot-Commands.md). Code references (mod-playerbots):
+- [ChatActionContext.h](https://github.com/hermensbas/mod-playerbots/blob/test-staging/src/Ai/Base/ChatActionContext.h)
+- [ActionContext.h](https://github.com/hermensbas/mod-playerbots/blob/test-staging/src/Ai/Base/ActionContext.h)
+- [ChatFilter.cpp](https://github.com/hermensbas/mod-playerbots/blob/test-staging/src/Bot/Cmd/ChatFilter.cpp)
+- [PlayerbotMgr.cpp](https://github.com/hermensbas/mod-playerbots/blob/test-staging/src/Bot/PlayerbotMgr.cpp)
+- UnBot add-on tooltips
+
+```
+# UnBot has init=auto but that doesn't always work, especially at level 1. Alternatively use
+# the following, or lower the equipment when the bots are too strong.
 .playerbot bot init=white | common | uncommon | rare | epic | legendary
 .playerbot bot init=MaxItemLevel
-.playerbot rndbot init (re-randomize all bots again)
-     (rndbot stats/update/reset/init/refresh/add/remove)
+.playerbot rndbot init          re-randomize all bots (also: stats/update/reset/refresh/add/remove)
 
-autogear (whenever init is broken, max equipment levelItem configured in playerbot.conf)
-maintenance ( e.g. clears quest log, smart destroy items in inventory etc)
+autogear                        when init is broken; max item level is configured in playerbots.conf
+maintenance                     e.g. clears quest log, smart-destroys inventory items
 
-# let alt bots attack other bot on sight in pvp zone
+# let alt bots attack other bots on sight in PvP zones
 nc +pvp
 nc -pvp
 
-# equip urself
+# equip yourself
 .playerbot bot self
 /w maintenance
 /w autogear
-(whisper yourself 'nc +new rpg,+grind')
-/w nc +new rpg,+grind,+gather,+loot,+quest
+/w nc +new rpg,+grind,+gather,+loot,+quest     (whisper yourself)
 
-# After init or talents respec make sure you reset bot AI (see unbot).
-.playerbot bot add <name-of-character-on-account> (or account name instead of character name to add all characters on an account
-
+# After init or a talent respec, reset the bot AI (see UnBot).
+.playerbot bot add <character-name>   (or an account name to add all characters of that account)
 ```
 
-Tank attack @dps attack in 10 seconds
+Tank attacks, DPS attacks 10 seconds later:
 ```
 @tank attack
 /in 10 @dps attack
-
-or use
-you could also use co +passive to get the dps to not attack until you use co -passive
 ```
+Or keep the DPS passive with `co +passive` until you use `co -passive`.
