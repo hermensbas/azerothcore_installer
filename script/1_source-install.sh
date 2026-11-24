@@ -99,12 +99,15 @@ then
 
 
     ##########################################################################################
-    # Download client-data (only if file does not exist)
+    # Download client-data (only if missing, or if AC_CLIENT_DATA points to another release
+    # than the one downloaded before; the URL is remembered in _data/data.url)
     ##########################################################################################
-    if ! [ -f ${ROOT_DIR}/_data/data.zip ]; 
+    if ! [ -f ${ROOT_DIR}/_data/data.zip ] || [ "$(cat ${ROOT_DIR}/_data/data.url 2>/dev/null)" != "${AC_CLIENT_DATA}" ];
     then
     mkdir -p ${ROOT_DIR}/_data > /dev/null 2>&1
-    sudo curl -L ${AC_CLIENT_DATA} --output ${ROOT_DIR}/_data/data.zip
+    sudo rm -f ${ROOT_DIR}/_data/data.zip
+    sudo curl -fL ${AC_CLIENT_DATA} --output ${ROOT_DIR}/_data/data.zip || exit 1
+    echo "${AC_CLIENT_DATA}" > ${ROOT_DIR}/_data/data.url
     fi
 
     ##########################################################################################
