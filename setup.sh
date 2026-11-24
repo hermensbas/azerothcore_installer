@@ -96,6 +96,16 @@ echo "alias auth='cd ${SERVER_ROOT};tmux attach -t ${AUTHSERVER_SESSION}'" >> ~/
 
 
 ##########################################################################################
+# tmux: mouse-wheel scrolling and a larger scrollback in the server consoles
+# (only appended when missing, so re-running setup.sh doesn't duplicate lines)
+##########################################################################################
+touch ~/.tmux.conf
+grep -qxF "set -g mouse on" ~/.tmux.conf || echo "set -g mouse on" >> ~/.tmux.conf
+grep -qxF "set -g history-limit 50000" ~/.tmux.conf || echo "set -g history-limit 50000" >> ~/.tmux.conf
+tmux source-file ~/.tmux.conf 2>/dev/null || true
+
+
+##########################################################################################
 # Print menu
 ##########################################################################################
 echo " "
